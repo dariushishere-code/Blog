@@ -292,33 +292,34 @@ window.addEventListener('DOMContentLoaded', () => {
     const fullTitle = title ? title.textContent.trim() : '';
     const fullSubtitle = subtitle ? subtitle.textContent.trim() : '';
 
-    if (title) title.textContent = '';
-    if (subtitle) subtitle.textContent = '';
-    headerText.classList.add('typing');
+      if (title) title.textContent = '';
+      if (subtitle) subtitle.textContent = '';
+      headerText.classList.add('typing');
 
-    const parts = [
-      {el: title, text: fullTitle, delay: 0},
-      {el: subtitle, text: fullSubtitle, delay: fullTitle.length * 80 + 250}
-    ];
+      const parts = [
+        {el: title, text: fullTitle, delay: 0},
+        {el: subtitle, text: fullSubtitle, delay: fullTitle.length * 80 + 250}
+      ];
 
-    parts.forEach(({el, text, delay}) => {
-      if (!el) return;
-      setTimeout(() => {
-        let index = 0;
-        const interval = setInterval(() => {
-          el.textContent += text[index] || '';
-          index += 1;
-          if (index >= text.length) {
-            clearInterval(interval);
-            if (subtitle === el) {
-              headerText.classList.remove('typing');
+      parts.forEach(({el, text, delay}) => {
+        if (!el) return;
+        setTimeout(() => {
+          let index = 0;
+          const interval = setInterval(() => {
+            el.textContent += text[index] || '';
+            index += 1;
+            if (index >= text.length) {
+              clearInterval(interval);
+              if (subtitle === el) {
+                headerText.classList.remove('typing');
+              }
             }
-          }
-        }, 80);
-      }, delay);
-    });
+          }, 80);
+        }, delay);
+      });
+    }
   }
-});
+);
 
 // Games logic
 const guessInput = document.getElementById('guess-input');

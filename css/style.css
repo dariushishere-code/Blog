@@ -779,6 +779,17 @@ input[type="range"]::-ms-thumb {
   gap: 10px;
   align-items: center;
 }
+.contact-section a:hover,
+.contact-section a:focus {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 28px rgba(120, 63, 172, 0.45);
+  border-color: rgba(152, 78, 208, 0.9);
+  background: linear-gradient(180deg, rgba(152,78,208,0.95), rgba(120,63,172,0.6));
+  color: var(--text-main);
+  outline: none;
+
+}
+
 .social-link{
   display: inline-flex;
   align-items: center;

@@ -51,11 +51,22 @@
 
     <meta property="og:locale" content="en_US" />
     <meta name="color-scheme" content="light dark" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; img-src 'self' https: data:; media-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; script-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"
+    />
+    <link rel="preload" href="./css/style.css" as="style" />
     <link href="./css/style.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap"
       rel="stylesheet"
     />
     <link rel="canonical" href="https://alirezaebrahimi.tech/" />
@@ -125,6 +136,7 @@
         <nav>
           <a class="nav-link" href="#about">About</a>
           <a class="nav-link" href="#library">Library</a>
+          <a class="nav-link" href="#projects">Projects</a>
           <a class="nav-link" href="#contact">Contact</a>
           <a class="nav-link" href="#resume">Resume</a>
         </nav>
@@ -282,6 +294,8 @@
               <img
                 src="./book images/crime and punishment.jpg"
                 alt="crime and punishment cover"
+                loading="lazy"
+                decoding="async"
             /></a>
             <div class="book-title">Crime and Punish ment</div>
           </div>
@@ -291,7 +305,11 @@
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img src="./book images/1984.jpg" alt="1984 cover"
+              <img
+                src="./book images/1984.jpg"
+                alt="1984 cover"
+                loading="lazy"
+                decoding="async"
             /></a>
             <div class="book-title">1984</div>
           </div>
@@ -304,6 +322,8 @@
               <img
                 src="./book images/one hundred years of solitude.jpg"
                 alt="one hundred years of solitude cover"
+                loading="lazy"
+                decoding="async"
               />
             </a>
             <div class="book-title">One Hundred Years Of Solitude</div>
@@ -317,6 +337,8 @@
               <img
                 src="./book images/metamorphosis.jpg"
                 alt="Metamorphosis cover"
+                loading="lazy"
+                decoding="async"
             /></a>
             <div class="book-title">The Meta morphosis</div>
           </div>
@@ -329,6 +351,8 @@
               <img
                 src="./book images/The stranger.jpg"
                 alt="The Stranger cover"
+                loading="lazy"
+                decoding="async"
             /></a>
             <div class="book-title">The Stranger</div>
           </div>
@@ -338,7 +362,11 @@
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img src="./book images/animal farm.jpg" alt="Animal Farm cover"
+              <img
+                src="./book images/animal farm.jpg"
+                alt="Animal Farm cover"
+                loading="lazy"
+                decoding="async"
             /></a>
             <div class="book-title">Animal Farm</div>
           </div>
@@ -348,10 +376,31 @@
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img src="./book images/plauge.jpg" alt="The Plauge cover"
+              <img
+                src="./book images/plauge.jpg"
+                alt="The Plauge cover"
+                loading="lazy"
+                decoding="async"
             /></a>
             <div class="book-title">The Plauge</div>
           </div>
+        </div>
+      </section>
+      <section id="projects" class="projects-section">
+        <h3 class="intro">Projects</h3>
+        <div class="projects-grid" role="list">
+          <article class="project-card" role="listitem">
+            <h4>Portfolio Website</h4>
+            <p>
+              This portfolio: pixel-inspired UI, responsive layout, music
+              player, and smooth theme switching.
+            </p>
+          </article>
+          <article class="project-card" role="listitem">
+            <h4>Project: Portfolio</h4>
+            <img src="./image/portfolio1.png" alt="portfolio Project Pic" />
+            <p>Best looking Portfolios using HTML , CSS , JavaScript</p>
+          </article>
         </div>
       </section>
 
@@ -364,7 +413,7 @@
         </p>
         <a
           class="social-link"
-          href="./resume/Alireza-Ebrahimi2.pdf"
+          href="./resume/AlirezaEbrahimiCv.pdf"
           target="_blank"
           rel="noopener"
           download="Resume"
@@ -405,6 +454,6 @@
       </section>
     </main>
 
-    <script src="./js/script.js"></script>
+    <script src="./js/script.js" defer></script>
   </body>
 </html>

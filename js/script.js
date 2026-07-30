@@ -435,5 +435,5 @@ document.addEventListener('readystatechange', tryHidePreloader);
 tryHidePreloader();
 window.addEventListener('load', hidePreloader);
 window.addEventListener('DOMContentLoaded', hidePreloader);
-setTimeout(hidePreloader, 1500);
-setTimeout(hidePreloaderImmediately, 5000);
+setTimeout(hidePreloader, 450);
+setTimeout(hidePreloaderImmediately, 1800);

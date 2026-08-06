@@ -1,0 +1,53 @@
+# Netlify configuration — Bold Typography Portfolio
+# Static HTML/CSS/JS site (no build step)
+
+[build]
+  command = ""
+  publish = "."
+
+# Production context (main branch)
+[context.production]
+  command = ""
+  publish = "."
+
+# Deploy previews (pull requests / other branches)
+[context.deploy-preview]
+  command = ""
+  publish = "."
+
+# Branch deploys
+[context.branch-deploy]
+  command = ""
+  publish = "."
+
+# ---------------------------------------------------------------------------
+# Security headers
+# ---------------------------------------------------------------------------
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    X-XSS-Protection = "1; mode=block"
+
+# Cache CSS and JS for a week (assets are versioned by filename in this project)
+[[headers]]
+  for = "./css/styles.css"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "./js/script.js"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+# ---------------------------------------------------------------------------
+# Redirects (optional)
+# Uncomment if you want unknown paths to serve the homepage
+# ---------------------------------------------------------------------------
+# [[redirects]]
+#   from = "/*"
+#   to = "/index.html"
+#   status = 200

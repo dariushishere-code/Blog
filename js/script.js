@@ -1,451 +1,291 @@
-// Array containing the local audio files, metadata, and pixel-art image paths
-const playlist = [
-  {
-    title: "Addict",
-    artist: "Kosheen",
-    cover: "./image/kosheen.jpg",
-    url: "./music/01 - Kosheen - Addict.mp3",
-  },
-  {
-    title: "Somewhere Only We Know",
-    artist: "Keane",
-    cover: "./image/keane.jpg",
-    url: "./music/1 1 - Keane - Somewhere Only We Know (320).mp3",
-  },
-  {
-    title: "Rivers Between Us",
-    artist: "Draconian",
-    cover: "./image/draconian.jpg",
-    url: "./music/1_8 - Rivers Between Us - Draconian (320).mp3",
-  },
-  {
-    title: "Hangman",
-    artist: "Madder Mortem",
-    cover: "./image/madder mortem.jpg",
-    url: "./music/Madder Mortem - Hangman.mp3",
-  },
-  {
-    title: "Majnoon",
-    artist: "Unknown",
-    cover: "",
-    url: "./music/Majnoon.mp3",
-  },
-  {
-    title: "Kenaram",
-    artist: "REZ",
-    cover: "./image/REZ.jpg",
-    url: "./music/REZ - Kenaram.mp3",
-  },
-  {
-    title: "Rangi",
-    artist: "REZ",
-    cover: "./image/REZ.jpg",
-    url: "./music/REZ-Rangi-320.mp3",
-  },
-  {
-    title: "Paganini Cantabile e Valser",
-    artist: "Ruggiero Ricci",
-    cover: "./image/ricci.jpg",
-    url: "./music/Ruggiero Ricci - Paganini  Cantabile e Valser, Op. 19, MS 45.mp3",
-  },
-  {
-    title: "That z My Name",
-    artist: "Sly Boogy",
-    cover: "./image/boogy.jpg",
-    url: "./music/That z My Name (Tha Clean)   Sly Boogy.m4a",
-  },
-  {
-    title: "Boulevard of Broken Dreams",
-    artist: "Green Day",
-    cover: "./image/green day.jpg",
-    url: "./music/1_1 - Boulevard of Broken Dreams - Green Day (320).mp3",
-  },
-  {
-    title: "I don't want to miss a thing",
-    artist: "Aerosmith",
-    cover: "./image/aerosmith.jpg",
-    url: "./music/1_1 - I Don't Want To Miss A Thing - Aerosmith (320).mp3",
-  },
-  {
-    title: "So Far Away",
-    artist: "Staind",
-    cover: "./image/staind.jpg",
-    url: "./music/1_3 - So Far Away - Staind (320).mp3",
-  },
-  {
-    title: "It's been a while",
-    artist: "Staind",
-    cover: "./image/staind.jpg",
-    url: "./music/1_4 - It's Been Awhile - Staind (320).mp3",
-  },
-  {
-    title: "Something to remind you",
-    artist: "Staind",
-    cover: "./image/staind.jpg",
-    url: "./music/1_10 - Something to Remind You - Staind (320).mp3",
-  },
-  {
-    title: "Outside",
-    artist: "Staind",
-    cover: "./image/staind.jpg",
-    url: "./music/1_11 - Outside - Staind (320).mp3",
-  },
-  {
-    title: "Something In The Way",
-    artist: "Nirvana",
-    cover: "./image/nirvana.jpg",
-    url: "./music/1_12 - Something In The Way - Nirvana (320).mp3",
-  },
-  {
-    title: "Dele Tanha",
-    artist: "ONEDAM",
-    cover: "",
-    url: "./music/ONEDAM - Dele Tanha.mp3",
-  },
-];
+/* ============================================
+   Portfolio — interactions & preloader
+   ============================================ */
 
-let currentTrackIndex = 0;
-let isPlaying = false;
+(function () {
+  "use strict";
 
-// Gather DOM Node Elements
-const audioEngine = document.getElementById("audio-engine");
-const trackTitle = document.getElementById("track-title");
-const trackArtist = document.getElementById("track-artist");
-const albumArt = document.getElementById("album-art");
-const progressBar = document.getElementById("progress-bar");
-const currentTimeDisplay = document.getElementById("current-time");
-const totalDurationDisplay = document.getElementById("total-duration");
+  // ===== Viking Rune Background Generator =====
+  const runes = [
+    "ᚠ",
+    "ᚢ",
+    "ᚦ",
+    "ᚨ",
+    "ᚱ",
+    "ᚲ",
+    "ᚷ",
+    "ᚹ",
+    "ᚺ",
+    "ᚾ",
+    "ᛁ",
+    "ᛃ",
+    "ᛇ",
+    "ᛈ",
+    "ᛉ",
+    "ᛊ",
+    "ᛏ",
+    "ᛒ",
+    "ᛖ",
+    "ᛗ",
+    "ᛚ",
+    "ᛜ",
+    "ᛞ",
+    "ᛟ",
+  ];
 
-const btnPlayPause = document.getElementById("btn-play-pause");
-const btnPrev = document.getElementById("btn-prev");
-const btnNext = document.getElementById("btn-next");
-const themeToggleButton = document.getElementById("theme-toggle");
-const themeStorageKey = "portfolio-theme";
+  const container = document.getElementById("vikingBg");
+  const COUNT = 50;
 
-const audioAvailable = Boolean(audioEngine);
-if (!audioAvailable) {
-  console.warn("Audio engine element not found; audio playback disabled.");
-}
-
-function applyTheme(theme) {
-  const root = document.documentElement;
-  if (theme === "light") {
-    root.classList.add("light");
-    if (themeToggleButton) themeToggleButton.textContent = "Dark Mode";
-  } else {
-    root.classList.remove("light");
-    if (themeToggleButton) themeToggleButton.textContent = "Light Mode";
+  function createRune() {
+    if (!container) return;
+    const el = document.createElement("div");
+    el.className =
+      "rune" +
+      (Math.random() > 0.65 ? " dim" : "") +
+      (Math.random() > 0.5 ? " drift" : "");
+    el.textContent = runes[Math.floor(Math.random() * runes.length)];
+    el.style.left = Math.random() * 100 + "vw";
+    const size = 1.6 + Math.random() * 2.4;
+    el.style.fontSize = size + "rem";
+    const duration = 22 + Math.random() * 28;
+    const delay = Math.random() * -duration;
+    el.style.animationDuration = duration + "s";
+    el.style.animationDelay = delay + "s";
+    el.style.animationTimingFunction = "cubic-bezier(0.25, 0.1, 0.25, 1)";
+    container.appendChild(el);
   }
-}
 
-function getSavedTheme() {
-  return localStorage.getItem(themeStorageKey);
-}
-
-function saveTheme(theme) {
-  localStorage.setItem(themeStorageKey, theme);
-}
-
-function getPreferredTheme() {
-  if (
-    window.matchMedia &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches
-  ) {
-    return "dark";
+  if (container) {
+    for (let i = 0; i < COUNT; i++) createRune();
   }
-  return "light";
-}
 
-function initTheme() {
-  const saved = getSavedTheme();
-  const theme =
-    saved === "light" || saved === "dark" ? saved : getPreferredTheme();
-  applyTheme(theme);
-}
-
-function toggleTheme() {
-  const current = document.documentElement.classList.contains("light")
-    ? "light"
-    : "dark";
-  const nextTheme = current === "light" ? "dark" : "light";
-  applyTheme(nextTheme);
-  saveTheme(nextTheme);
-}
-
-if (themeToggleButton) {
-  themeToggleButton.addEventListener("click", toggleTheme);
-}
-
-// Initialize the first track data
-function loadTrack(index) {
-  const track = playlist[index];
-  if (audioAvailable) {
-    audioEngine.src = track.url;
-    audioEngine.load();
-  }
-  if (trackTitle) trackTitle.textContent = track.title;
-  if (trackArtist) trackArtist.textContent = `ARTIST: ${track.artist}`;
-  if (albumArt) albumArt.style.backgroundImage = `url('${track.cover}')`;
-
-  // Reset track sliders
-  if (progressBar) progressBar.value = 0;
-  if (currentTimeDisplay) currentTimeDisplay.textContent = "0:00";
-  if (totalDurationDisplay) totalDurationDisplay.textContent = "0:00";
-}
-
-// Control Toggle Switch Action
-function togglePlayPause() {
-  if (isPlaying) {
-    pauseTrack();
-  } else {
-    playTrack();
-  }
-}
-
-function playTrack() {
-  if (!audioAvailable) return;
-  if (audioEngine.paused) {
-    audioEngine
-      .play()
-      .then(() => {
-        isPlaying = true;
-        if (btnPlayPause) btnPlayPause.textContent = "⏸";
-      })
-      .catch((err) => console.log("Playback interaction blocked:", err));
-  }
-}
-
-function pauseTrack() {
-  if (!audioAvailable) return;
-  if (!audioEngine.paused) {
-    audioEngine.pause();
-    isPlaying = false;
-    if (btnPlayPause) btnPlayPause.textContent = "▶";
-  }
-}
-
-function nextTrack() {
-  currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
-  loadTrack(currentTrackIndex);
-  if (isPlaying) playTrack();
-}
-
-function prevTrack() {
-  currentTrackIndex =
-    (currentTrackIndex - 1 + playlist.length) % playlist.length;
-  loadTrack(currentTrackIndex);
-  if (isPlaying) playTrack();
-}
-
-// Convert native seconds tracking strings into readable MM:SS clocks
-function formatTime(seconds) {
-  if (isNaN(seconds)) return "0:00";
-  const mins = Math.floor(seconds / 60);
-  const secs = Math.floor(seconds % 60);
-  return `${mins}:${secs < 10 ? "0" : ""}${secs}`;
-}
-
-// Core Hardware Engine Updates
-if (audioAvailable) {
-  audioEngine.addEventListener("timeupdate", () => {
-    if (audioEngine.duration && progressBar) {
-      const currentPercent =
-        (audioEngine.currentTime / audioEngine.duration) * 100;
-      progressBar.value = currentPercent;
-      currentTimeDisplay.textContent = formatTime(audioEngine.currentTime);
+  // ===== Left fixed glyph rail (glitch on scroll) =====
+  const rail = document.getElementById("glyphRail");
+  if (rail) {
+    const RAIL_COUNT = 14;
+    for (let i = 0; i < RAIL_COUNT; i++) {
+      const span = document.createElement("span");
+      span.className = "rail-rune";
+      span.textContent = runes[Math.floor(Math.random() * runes.length)];
+      rail.appendChild(span);
     }
-  });
 
-  audioEngine.addEventListener("loadedmetadata", () => {
-    if (totalDurationDisplay) {
-      totalDurationDisplay.textContent = formatTime(audioEngine.duration);
-    }
-  });
+    let lastScrollY = 0;
+    window.addEventListener(
+      "scroll",
+      () => {
+        const y = window.scrollY || window.pageYOffset;
+        if (Math.abs(y - lastScrollY) > 18) {
+          const children = Array.from(rail.querySelectorAll(".rail-rune"));
+          const swaps = 3 + Math.floor(Math.random() * 4);
+          for (let i = 0; i < swaps; i++) {
+            const idx = Math.floor(Math.random() * children.length);
+            const el = children[idx];
+            el.classList.add("is-glitch");
+            el.textContent = runes[Math.floor(Math.random() * runes.length)];
+            setTimeout(
+              () => el.classList.remove("is-glitch"),
+              120 + Math.random() * 180,
+            );
+          }
+          lastScrollY = y;
+        }
+      },
+      { passive: true },
+    );
+  }
 
-  // Jump timeline manually on scrub input
-  if (progressBar) {
-    progressBar.addEventListener("input", () => {
-      if (audioEngine.duration) {
-        const targetTime = (progressBar.value / 100) * audioEngine.duration;
-        audioEngine.currentTime = targetTime;
+  // Theme preference listener (unchanged)
+  try {
+    const mq = window.matchMedia("(prefers-color-scheme: dark)");
+    mq.addEventListener("change", (e) => {
+      if (!localStorage.getItem("theme")) {
+        // setTheme exists in your project
+        if (typeof setTheme === "function") {
+          setTheme(e.matches ? "dark" : "light");
+        }
       }
     });
+  } catch (_) {}
+
+  // ---------- Year in footer ----------
+  const yearEl = document.getElementById("year");
+  if (yearEl) {
+    yearEl.textContent = new Date().getFullYear();
   }
 
-  // Auto-advance song on track termination hook
-  audioEngine.addEventListener("ended", () => {
-    nextTrack();
-  });
-}
+  // ---------- Preloader (hardened for mobile) ----------
+  const preloader = document.getElementById("preloader");
+  const countEl = document.getElementById("preloader-count");
+  const progressEl = document.getElementById("preloader-progress");
 
-// Event Binding Listeners
-if (btnPlayPause) btnPlayPause.addEventListener("click", togglePlayPause);
-if (btnNext) btnNext.addEventListener("click", nextTrack);
-if (btnPrev) btnPrev.addEventListener("click", prevTrack);
+  let preloaderFinished = false;
 
-// Boot Application Player
-window.addEventListener("DOMContentLoaded", () => {
-  initTheme();
-  if (audioAvailable) {
-    audioEngine.preload = "metadata";
-    try {
-      audioEngine.crossOrigin = "anonymous";
-    } catch (e) {}
-  }
-  loadTrack(currentTrackIndex);
-  if (btnPlayPause) btnPlayPause.textContent = "▶";
+  function finishPreloader() {
+    if (preloaderFinished) return;
+    preloaderFinished = true;
 
-  const headerText = document.querySelector(".header-text");
-  if (headerText) {
-    const title = headerText.querySelector("h1");
-    const subtitle = headerText.querySelector("h2");
-    const fullTitle = title ? title.textContent.trim() : "";
-    const fullSubtitle = subtitle ? subtitle.textContent.trim() : "";
-
-    if (title) title.textContent = "";
-    if (subtitle) subtitle.textContent = "";
-    headerText.classList.add("typing");
-
-    const parts = [
-      { el: title, text: fullTitle, delay: 0 },
-      { el: subtitle, text: fullSubtitle, delay: fullTitle.length * 80 + 250 },
-    ];
-
-    parts.forEach(({ el, text, delay }) => {
-      if (!el) return;
+    if (preloader) {
+      preloader.classList.add("is-done");
       setTimeout(() => {
-        let index = 0;
-        const interval = setInterval(() => {
-          el.textContent += text[index] || "";
-          index += 1;
-          if (index >= text.length) {
-            clearInterval(interval);
-            if (subtitle === el) {
-              headerText.classList.remove("typing");
-            }
-          }
-        }, 80);
-      }, delay);
-    });
+        preloader.setAttribute("aria-hidden", "true");
+      }, 700);
+    }
+    document.body.classList.add("is-ready");
   }
-});
 
-// Games logic
-const guessInput = document.getElementById("guess-input");
-const guessButton = document.getElementById("guess-button");
-const guessResult = document.getElementById("guess-result");
-const rpsButtons = document.querySelectorAll(".rps-buttons button");
-const rpsResult = document.getElementById("rps-result");
-const tapStart = document.getElementById("tap-start");
-const tapButton = document.getElementById("tap-button");
-const tapResult = document.getElementById("tap-result");
+  function runPreloader() {
+    // Always finish after 2.2 s max – never stuck on phones
+    const hardTimeout = setTimeout(finishPreloader, 2200);
 
-let secretNumber = Math.floor(Math.random() * 20) + 1;
-let tapCount = 0;
-let tapStartTime = null;
-
-function resetGuessGame() {
-  secretNumber = Math.floor(Math.random() * 20) + 1;
-  if (guessResult) guessResult.textContent = "New number ready.";
-}
-
-if (guessButton && guessInput && guessResult) {
-  guessButton.addEventListener("click", () => {
-    const guess = Number(guessInput.value);
-    if (!guess || guess < 1 || guess > 20) {
-      guessResult.textContent = "Pick a number between 1 and 20.";
+    if (!preloader || !countEl || !progressEl) {
+      clearTimeout(hardTimeout);
+      finishPreloader();
       return;
     }
-    if (guess === secretNumber) {
-      guessResult.textContent = `Correct! It was ${secretNumber}. New game started.`;
-      resetGuessGame();
-    } else if (guess < secretNumber) {
-      guessResult.textContent = "Too low! Try higher.";
-    } else {
-      guessResult.textContent = "Too high! Try lower.";
-    }
-  });
-}
 
-if (rpsButtons && rpsResult) {
-  const choices = ["rock", "paper", "scissors"];
-  const beats = { rock: "scissors", paper: "rock", scissors: "paper" };
-  rpsButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const player = button.dataset.choice;
-      const computer = choices[Math.floor(Math.random() * choices.length)];
-      let resultText = `Computer picked ${computer}. `;
-      if (player === computer) {
-        resultText += "Draw!";
-      } else if (beats[player] === computer) {
-        resultText += "You win!";
+    let progress = 0;
+    const duration = 1400;
+    const start = performance.now();
+
+    function tick(now) {
+      if (preloaderFinished) return;
+
+      const elapsed = now - start;
+      const t = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 3);
+      progress = Math.round(eased * 100);
+
+      countEl.textContent = String(progress).padStart(2, "0");
+      progressEl.style.width = progress + "%";
+
+      if (t < 1) {
+        requestAnimationFrame(tick);
       } else {
-        resultText += "You lose!";
+        clearTimeout(hardTimeout);
+        setTimeout(finishPreloader, 180);
       }
-      rpsResult.textContent = resultText;
-    });
-  });
-}
-
-if (tapStart && tapButton && tapResult) {
-  tapStart.addEventListener("click", () => {
-    tapCount = 0;
-    tapStartTime = Date.now();
-    tapButton.disabled = false;
-    tapResult.textContent = "Tap the button 10 times fast!";
-  });
-  tapButton.addEventListener("click", () => {
-    tapCount += 1;
-    const elapsed = (Date.now() - tapStartTime) / 1000;
-    if (tapCount >= 10) {
-      tapButton.disabled = true;
-      const score = Math.max(0, Math.round((10 / elapsed) * 100));
-      tapResult.textContent = `Done! ${tapCount} taps in ${elapsed.toFixed(2)}s. Score: ${score}`;
-    } else {
-      tapResult.textContent = `Taps: ${tapCount}/10`;
     }
-  });
-}
 
-// Preloader hide helper
-let preloaderHidden = false;
-function hidePreloader() {
-  const preloader = document.getElementById("preloader");
-  if (!preloader || preloaderHidden) return;
-  preloaderHidden = true;
-  preloader.classList.add("fade-out");
-  preloader.style.pointerEvents = "none";
-  setTimeout(() => {
-    if (preloader.parentNode) {
-      preloader.parentNode.removeChild(preloader);
-    }
-  }, 700);
-}
-
-function hidePreloaderImmediately() {
-  const preloader = document.getElementById("preloader");
-  if (!preloader || preloaderHidden) return;
-  preloaderHidden = true;
-  preloader.style.transition = "none";
-  preloader.style.opacity = "0";
-  preloader.style.pointerEvents = "none";
-  if (preloader.parentNode) {
-    preloader.parentNode.removeChild(preloader);
+    requestAnimationFrame(tick);
   }
-}
 
-function tryHidePreloader() {
+  // Multiple safe triggers so mobile never hangs
+  function startPreloaderSafely() {
+    if (preloaderFinished) return;
+    runPreloader();
+  }
+
+  if (document.fonts && document.fonts.ready) {
+    Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 600))])
+      .then(startPreloaderSafely)
+      .catch(startPreloaderSafely);
+  } else {
+    startPreloaderSafely();
+  }
+
+  // Extra safety nets
+  window.addEventListener("load", startPreloaderSafely);
+  document.addEventListener("DOMContentLoaded", startPreloaderSafely);
   if (
-    document.readyState === "interactive" ||
-    document.readyState === "complete"
+    document.readyState === "complete" ||
+    document.readyState === "interactive"
   ) {
-    hidePreloader();
+    startPreloaderSafely();
   }
-}
+  // Final absolute fallback
+  setTimeout(startPreloaderSafely, 300);
 
-document.addEventListener("readystatechange", tryHidePreloader);
-tryHidePreloader();
-window.addEventListener("load", hidePreloader);
-window.addEventListener("DOMContentLoaded", hidePreloader);
-setTimeout(hidePreloader, 450);
-setTimeout(hidePreloaderImmediately, 1800);
+  // ---------- Mobile nav ----------
+  const toggle = document.getElementById("nav-toggle");
+  const nav = document.getElementById("nav");
+
+  if (toggle && nav) {
+    toggle.addEventListener("click", () => {
+      const open = toggle.getAttribute("aria-expanded") === "true";
+      toggle.setAttribute("aria-expanded", String(!open));
+      nav.classList.toggle("is-open", !open);
+    });
+
+    nav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        toggle.setAttribute("aria-expanded", "false");
+        nav.classList.remove("is-open");
+      });
+    });
+  }
+
+  // ---------- Header scroll state ----------
+  const header = document.getElementById("header");
+  function onScroll() {
+    const y = window.scrollY || window.pageYOffset;
+    if (header) {
+      header.classList.toggle("is-scrolled", y > 24);
+    }
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  // ---------- Scroll reveal ----------
+  const revealEls = document.querySelectorAll(
+    ".section-header, .project, .about-left, .about-right, .contact .section-label, .contact-title, .contact-sub, .contact-actions, .contact-links",
+  );
+  revealEls.forEach((el) => el.classList.add("reveal"));
+
+  const projectList = document.querySelector(".project-list");
+  if (projectList) {
+    projectList.classList.add("reveal-stagger");
+    projectList
+      .querySelectorAll(".project")
+      .forEach((p) => p.classList.remove("reveal"));
+  }
+
+  const skillsList = document.querySelector(".skills-list");
+  if (skillsList) {
+    skillsList.classList.add("reveal-stagger");
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
+  );
+
+  document.querySelectorAll(".reveal, .reveal-stagger").forEach((el) => {
+    observer.observe(el);
+  });
+
+  // Hero entrance after preloader
+  const heroTitle = document.querySelector(".hero-title");
+  const heroSub = document.querySelector(".hero-sub");
+  const heroCta = document.querySelector(".hero-cta");
+  const heroLabel = document.querySelector(".hero-label");
+
+  [heroLabel, heroTitle, heroSub, heroCta].forEach((el, i) => {
+    if (!el) return;
+    el.style.opacity = "0";
+    el.style.transform = "translateY(18px)";
+    el.style.transition = `opacity 0.55s cubic-bezier(0.25,0,0,1) ${0.15 + i * 0.08}s, transform 0.55s cubic-bezier(0.25,0,0,1) ${0.15 + i * 0.08}s`;
+  });
+
+  const bodyObserver = new MutationObserver(() => {
+    if (document.body.classList.contains("is-ready")) {
+      [heroLabel, heroTitle, heroSub, heroCta].forEach((el) => {
+        if (!el) return;
+        el.style.opacity = "1";
+        el.style.transform = "translateY(0)";
+      });
+      bodyObserver.disconnect();
+    }
+  });
+  bodyObserver.observe(document.body, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
+})();

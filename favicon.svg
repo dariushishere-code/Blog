@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="AE">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff3d00"/>
+      <stop offset="100%" stop-color="#ff6b35"/>
+    </linearGradient>
+  </defs>
+  <!-- Dark rounded square background -->
+  <rect width="64" height="64" rx="12" fill="#0a0a0a"/>
+  <!-- Subtle border -->
+  <rect x="1.5" y="1.5" width="61" height="61" rx="10.5" fill="none" stroke="#262626" stroke-width="1.5"/>
+  <!-- AE monogram -->
+  <text x="32" y="42" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="26" font-weight="700" letter-spacing="-0.06em" fill="url(#g)">AE</text>
+  <!-- Accent underline -->
+  <rect x="18" y="48" width="28" height="2.5" rx="1.25" fill="#ff3d00"/>
+</svg>

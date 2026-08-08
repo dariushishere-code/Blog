@@ -15,88 +15,48 @@
     <meta name="author" content="Alireza Ebrahimi" />
     <meta name="robots" content="index, follow" />
     <meta property="og:type" content="website" />
-
     <meta
       property="og:title"
       content="Alireza Ebrahimi | Front-End Developer"
     />
-
     <meta
       property="og:description"
       content="Explore my portfolio, projects, skills, and experience in modern web development."
     />
-
     <meta property="og:url" content="https://alirezaebrahimi.tech/" />
-
     <meta property="og:site_name" content="Alireza Ebrahimi Portfolio" />
-
     <meta
       property="og:image"
       content="https://alirezaebrahimi.tech/assets/preview.jpg"
     />
 
-    <!-- Fonts: Inter Tight + Inter + Playfair Display + JetBrains Mono -->
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <!-- Fonts (fewer weights = faster) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;600;700&family=JetBrains+Mono:wght@400;500&family=Sekuya&display=swap"
       rel="stylesheet"
     />
-    <link href="https://fonts.googleapis.com/css2?family=Sekuya&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="preload" href="/css/style.css" as="style" />
+    <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body class="dark">
+    <!-- Viking rune background -->
     <div class="viking-bg" id="vikingBg"></div>
+
     <!-- Left glyph rail -->
-<div id="glyphRail" class="glyph-rail" aria-hidden="true"></div>
+    <div id="glyphRail" class="glyph-rail" aria-hidden="true"></div>
 
-<!-- Realistic animated axe (place inside #vikingBg if you have it) -->
-<div class="viking-axe" aria-hidden="true">
-  <svg viewBox="0 0 220 380" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <!-- wooden handle -->
-    <rect x="98" y="145" width="24" height="220" rx="4" fill="#5c4033"/>
-    <rect x="102" y="150" width="16" height="210" rx="3" fill="#7a5c45"/>
-    <path d="M102 160 Q110 200 102 250 Q110 300 102 340" stroke="#3e2a1f" stroke-width="1.5" opacity="0.6"/>
-    <path d="M114 155 Q106 210 114 270 Q106 320 114 355" stroke="#3e2a1f" stroke-width="1.2" opacity="0.5"/>
-
-    <!-- metal binding / socket -->
-    <rect x="90" y="130" width="40" height="28" rx="3" fill="#4a4a4a"/>
-    <rect x="93" y="134" width="34" height="6" fill="#ff3d00" opacity="0.7"/>
-    <rect x="93" y="148" width="34" height="6" fill="#ff3d00" opacity="0.7"/>
-    <rect x="95" y="138" width="30" height="14" rx="1" fill="#6e6e6e"/>
-
-    <!-- axe head (bearded style) -->
-    <path d="M30 40
-             C55 8, 110 5, 155 25
-             L175 70
-             C160 55, 130 50, 105 70
-             L95 115
-             L70 115
-             L55 75
-             C40 55, 35 50, 30 40 Z"
-          fill="#c8c8c8"/>
-    <!-- blade highlight -->
-    <path d="M45 48
-             C70 20, 115 18, 148 38
-             L160 65
-             C145 52, 120 48, 100 68
-             L92 100
-             L78 100
-             L65 70
-             C55 55, 50 52, 45 48 Z"
-          fill="#e8e8e8"/>
-    <!-- cutting edge glow line -->
-    <path d="M32 42 C58 12, 112 10, 158 32" stroke="#ff3d00" stroke-width="3.5" stroke-linecap="round" opacity="0.85"/>
-    <!-- lower beard edge -->
-    <path d="M70 115 L95 115 L105 70" stroke="#9a9a9a" stroke-width="2" fill="none"/>
-  </svg>
-</div>
     <div class="contentabove">
       <!-- ========== PRELOADER ========== -->
       <div id="preloader" class="preloader" aria-hidden="true">
         <div class="preloader-inner">
-          <span class="preloader-number" id="preloader-count">0</span>
+          <span class="preloader-number" id="preloader-count">00</span>
           <div class="preloader-bar">
             <div class="preloader-progress" id="preloader-progress"></div>
           </div>
@@ -104,26 +64,32 @@
         </div>
       </div>
 
+      <!-- ========== PAGE TRANSITION OVERLAY ========== -->
+      <div
+        id="page-transition"
+        class="page-transition"
+        aria-hidden="true"
+      ></div>
+
       <!-- ========== NOISE OVERLAY ========== -->
       <div class="noise" aria-hidden="true"></div>
 
       <!-- ========== NAV ========== -->
       <header class="site-header" id="header">
         <div class="container header-inner">
-          <a href="#hero" class="logo" data-text="Alireza Ebrahimi | AE">
-            AE
-          </a>
+          <a href="#hero" class="logo" data-text="Alireza Ebrahimi | AE">AE</a>
 
           <div class="header-actions">
             <nav class="nav" id="nav" aria-label="Primary">
               <ul class="nav-list">
                 <li><a href="#work" class="nav-link">Work</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
+                <li>
+                  <a href="/gallery.html" class="nav-link page-link">Gallery</a>
+                </li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
               </ul>
             </nav>
-
-            </button>
 
             <button
               class="nav-toggle"
@@ -177,7 +143,6 @@
             </div>
           </div>
 
-          <!-- Decorative oversized text (hidden on small screens) -->
           <div class="hero-decor" aria-hidden="true">
             <span>01</span>
           </div>
@@ -198,21 +163,14 @@
                   <!-- TODO: Project link URL -->
                   <div class="project-meta">
                     <span class="project-index mono">01</span>
-                    <span class="project-year mono"
-                      ><!-- TODO: Year -->2024</span
-                    >
+                    <span class="project-year mono">2024</span>
                   </div>
-                  <h3 class="project-title">
-                    <!-- TODO: Project name -->
-                    Atlas Dashboard
-                  </h3>
+                  <h3 class="project-title">Atlas Dashboard</h3>
                   <p class="project-desc">
-                    <!-- TODO: 1–2 sentence description -->
                     A real-time analytics platform for logistics teams. Focus on
                     density without visual noise.
                   </p>
                   <ul class="project-tags">
-                    <!-- TODO: Tech / role tags -->
                     <li>React</li>
                     <li>TypeScript</li>
                     <li>Design System</li>
@@ -237,16 +195,10 @@
                 <a href="#" class="project-link" target="_blank" rel="noopener">
                   <div class="project-meta">
                     <span class="project-index mono">02</span>
-                    <span class="project-year mono"
-                      ><!-- TODO: Year -->2023</span
-                    >
+                    <span class="project-year mono">2023</span>
                   </div>
-                  <h3 class="project-title">
-                    <!-- TODO: Project name -->
-                    Meridian Editorial
-                  </h3>
+                  <h3 class="project-title">Meridian Editorial</h3>
                   <p class="project-desc">
-                    <!-- TODO: Description -->
                     Magazine-style reading experience for long-form journalism.
                     Typography-first layout system.
                   </p>
@@ -275,16 +227,10 @@
                 <a href="#" class="project-link" target="_blank" rel="noopener">
                   <div class="project-meta">
                     <span class="project-index mono">03</span>
-                    <span class="project-year mono"
-                      ><!-- TODO: Year -->2023</span
-                    >
+                    <span class="project-year mono">2023</span>
                   </div>
-                  <h3 class="project-title">
-                    <!-- TODO: Project name -->
-                    Pulse Mobile
-                  </h3>
+                  <h3 class="project-title">Pulse Mobile</h3>
                   <p class="project-desc">
-                    <!-- TODO: Description -->
                     Health tracking app focused on glanceable data and calm
                     interactions.
                   </p>
@@ -308,21 +254,15 @@
                 </a>
               </article>
 
-              <!-- Project 4 (optional – duplicate or remove) -->
+              <!-- Project 4 -->
               <article class="project">
                 <a href="#" class="project-link" target="_blank" rel="noopener">
                   <div class="project-meta">
                     <span class="project-index mono">04</span>
-                    <span class="project-year mono"
-                      ><!-- TODO: Year -->2022</span
-                    >
+                    <span class="project-year mono">2022</span>
                   </div>
-                  <h3 class="project-title">
-                    <!-- TODO: Project name -->
-                    Studio Site
-                  </h3>
+                  <h3 class="project-title">Studio Site</h3>
                   <p class="project-desc">
-                    <!-- TODO: Description -->
                     Portfolio and case-study platform for a small design studio.
                     Emphasis on image + type balance.
                   </p>
@@ -375,15 +315,15 @@
 
               <div class="about-stats">
                 <div class="stat">
-                  <span class="stat-number mono"><!-- TODO: Number -->01</span>
+                  <span class="stat-number mono">01</span>
                   <span class="stat-label">Years experience</span>
                 </div>
                 <div class="stat">
-                  <span class="stat-number mono"><!-- TODO: Number -->02</span>
+                  <span class="stat-number mono">02</span>
                   <span class="stat-label">Shipped projects</span>
                 </div>
                 <div class="stat">
-                  <span class="stat-number mono"><!-- TODO: Number -->12</span>
+                  <span class="stat-number mono">12</span>
                   <span class="stat-label">Design systems</span>
                 </div>
               </div>
@@ -436,7 +376,6 @@
             </div>
 
             <div class="contact-links">
-              <!-- TODO: Update social links -->
               <a
                 href="https://x.com/alirezaebdev"
                 class="contact-link"
@@ -465,7 +404,7 @@
                 <span class="underline"></span>
               </a>
               <a
-                href="./resume/AlirezaEbrahimiCv.pdf"
+                href="/resume/AlirezaEbrahimiCv.pdf"
                 class="contact-link"
                 target="_blank"
                 rel="noopener"
@@ -482,15 +421,13 @@
       <footer class="site-footer">
         <div class="container footer-inner">
           <p class="footer-copy mono">
-            © <span id="year"></span>
-
-            Alireza Ebrahimi. All rights reserved.
+            © <span id="year"></span> Alireza Ebrahimi. All rights reserved.
           </p>
           <p class="footer-note">Built with intention.</p>
         </div>
       </footer>
 
-      <script src="./js/script.js"></script>
+      <script src="/js/script.js" defer></script>
     </div>
   </body>
 </html>

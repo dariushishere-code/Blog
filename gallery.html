@@ -1,0 +1,700 @@
+<!doctype html>
+<html lang="en" class="dark" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gallery — Alireza Ebrahimi</title>
+    <meta
+      name="description"
+      content="Photography by Alireza Ebrahimi. A visual journal of light, form, and place."
+    />
+    <meta name="author" content="Alireza Ebrahimi" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <!-- Faster font loading: fewer families/weights + display=swap -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;600;700&family=JetBrains+Mono:wght@400;500&family=Sekuya&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Preload critical CSS -->
+    <link rel="preload" href="/css/style.css" as="style" />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body class="dark">
+    <div class="viking-bg" id="vikingBg" aria-hidden="true"></div>
+    <div id="glyphRail" class="glyph-rail" aria-hidden="true"></div>
+
+    <div class="contentabove">
+      <div id="preloader" class="preloader" aria-hidden="true">
+        <div class="preloader-inner">
+          <span class="preloader-number" id="preloader-count">00</span>
+          <div class="preloader-bar">
+            <div class="preloader-progress" id="preloader-progress"></div>
+          </div>
+          <p class="preloader-label">LOADING</p>
+        </div>
+      </div>
+
+      <div
+        id="page-transition"
+        class="page-transition"
+        aria-hidden="true"
+      ></div>
+      <div class="noise" aria-hidden="true"></div>
+
+      <header class="site-header" id="header">
+        <div class="container header-inner">
+          <a href="/" class="logo page-link">AE</a>
+          <div class="header-actions">
+            <nav class="nav" id="nav" aria-label="Primary">
+              <ul class="nav-list">
+                <li><a href="/#work" class="nav-link page-link">Work</a></li>
+                <li><a href="/#about" class="nav-link page-link">About</a></li>
+                <li>
+                  <a href="/gallery.html" class="nav-link is-active">Gallery</a>
+                </li>
+                <li>
+                  <a href="/#contact" class="nav-link page-link">Contact</a>
+                </li>
+              </ul>
+            </nav>
+            <button
+              class="nav-toggle"
+              id="nav-toggle"
+              aria-label="Toggle menu"
+              aria-expanded="false"
+            >
+              <span class="nav-toggle-line"></span>
+              <span class="nav-toggle-line"></span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section class="gallery-hero section" id="journey">
+          <div class="container">
+            <p class="section-label mono">Photography</p>
+            <h1 class="gallery-title">
+              Through the<br /><span class="accent">lens</span>
+            </h1>
+            <div class="gallery-intro">
+              <p class="gallery-lead">
+                Photography is how I slow the world down. What began as a
+                curiosity with light and shadow has grown into a deliberate
+                practice of noticing — architecture, quiet streets, and the
+                fleeting geometry of everyday life.
+              </p>
+              <p class="gallery-body">
+                Over the years I’ve shot film and digital, travelled with only a
+                single lens, and learned that the strongest frames are rarely
+                the most dramatic. They are the ones that feel honest. This
+                gallery is a living collection of that work — a visual journal
+                rather than a finished portfolio.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="gallery-grid-section section" id="photos">
+          <div class="container">
+            <header class="section-header">
+              <p class="section-label mono">Selected Frames</p>
+              <h2 class="section-title">Gallery</h2>
+            </header>
+
+            <!--
+              ============================================
+              RESPONSIVE WEBP IMAGES
+              ============================================
+              For each photo provide THREE widths (WebP):
+                photo-01-400.webp   (~400px wide)
+                photo-01-800.webp   (~800px wide)
+                photo-01-1200.webp  (~1200px wide)
+
+              Folder: /images/
+
+              Tip (ImageMagick):
+                convert in.jpg -resize 400x  -quality 80 photo-01-400.webp
+                convert in.jpg -resize 800x  -quality 80 photo-01-800.webp
+                convert in.jpg -resize 1200x -quality 82 photo-01-1200.webp
+
+              sizes matches the grid:
+                mobile  1-col → 100vw
+                tablet  2-col → 50vw
+                desktop 3-col → 33vw
+              ============================================
+            -->
+
+            <div class="gallery-grid">
+              <figure class="gallery-item">
+                <img
+                  src="./webp/Carpet.webp"
+                  srcset="
+                    ./webp/Carpet.webp  400w,
+                    ./webp/Carpet.webp  800w,
+                    ./webp/Carpet.webp 1200w
+                  "
+                  sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                  alt="Carpet"
+                  width="800"
+                  height="800"
+                  decoding="async"
+                  fetchpriority="high"
+                />
+                <figcaption class="gallery-caption">
+                  <span class="mono">01</span>
+                  <span>Carpet</span>
+                </figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img
+                  src="./webp/Dress.webp"
+                  srcset="
+                    ./webp/Dress.webp  400w,
+                    ./webp/Dress.webp  800w,
+                    ./webp/Dress.webp 1200w
+                  "
+                  sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                  alt="Hanging Dress"
+                  width="800"
+                  height="800"
+                  decoding="async"
+                  fetchpriority="high"
+                />
+                <figcaption class="gallery-caption">
+                  <span class="mono">02</span>
+                  <span>Hanging Dress</span>
+                </figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img
+                  src="./webp/IMG_0250.webp"
+                  srcset="
+                    ./webp/IMG_0250.webp  400w,
+                    ./webp/IMG_0250.webp  800w,
+                    ./webp/IMG_0250.webp 1200w
+                  "
+                  sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                  alt="Tehran Streets"
+                  width="800"
+                  height="800"
+                  decoding="async"
+                  loading="lazy"
+                />
+                <figcaption class="gallery-caption">
+                  <span class="mono">03</span>
+                  <span>Tehran Streets</span>
+                </figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img
+                  src="./webp/IMG_0251.webp"
+                  srcset="
+                    ./webp/IMG_0251.webp  400w,
+                    ./webp/IMG_0251.webp  800w,
+                    ./webp/IMG_0251.webp 1200w
+                  "
+                  sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                  alt="Tehran Streets"
+                  width="800"
+                  height="800"
+                  decoding="async"
+                  loading="lazy"
+                />
+                <figcaption class="gallery-caption">
+                  <span class="mono">04</span>
+                  <span>Tehran Streets</span>
+                </figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img
+                  src="./webp/IMG_0261.webp"
+                  srcset="
+                    ./webp/IMG_0261.webp  400w,
+                    ./webp/IMG_0261.webp  800w,
+                    ./webp/IMG_0261.webp 1200w
+                  "
+                  sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                  alt="Abyaneh Iran Archive"
+                  width="800"
+                  height="800"
+                  decoding="async"
+                  loading="lazy"
+                />
+                <figcaption class="gallery-caption">
+                  <span class="mono">05</span>
+                  <span>Abyaneh \ Iran</span>
+                </figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img
+                  src="./webp/IMG_0262.webp"
+                  srcset="
+                    ./webp/IMG_0262.webp  400w,
+                    ./webp/IMG_0262.webp  800w,
+                    ./webp/IMG_0262.webp 1200w
+                  "
+                  sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                  alt="From abyaneh Collection"
+                  width="800"
+                  height="800"
+                  decoding="async"
+                  loading="lazy"
+                />
+                <figcaption class="gallery-caption">
+                  <span class="mono">06</span>
+                  <span>Abyaneh \ Iran</span>
+                </figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img
+                  src="./webp/IMG_0341.webp"
+                  srcset="
+                    ./webp/IMG_0341.webp  400w,
+                    ./webp/IMG_0341.webp  800w,
+                    ./webp/IMG_0341.webp 1200w
+                  "
+                  sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                  alt="Abyaneh Streets"
+                  width="800"
+                  height="800"
+                  decoding="async"
+                  loading="lazy"
+                />
+                <figcaption class="gallery-caption">
+                  <span class="mono">07</span>
+                  <span>Abyaneh Streets</span>
+                </figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img
+                  src="./webp/IMG_0359.webp"
+                  srcset="
+                    ./webp/IMG_0359.webp  400w,
+                    ./webp/IMG_0359.webp  800w,
+                    ./webp/IMG_0359.webp 1200w
+                  "
+                  sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                  alt="Abyaneh Streets"
+                  width="800"
+                  height="800"
+                  decoding="async"
+                  loading="lazy"
+                />
+                <figcaption class="gallery-caption">
+                  <span class="mono">07</span>
+                  <span>Abyaneh Streets</span>
+                </figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img
+                  src="./webp/IMG_0371.webp"
+                  srcset="
+                    ./webp/IMG_0371.webp  400w,
+                    ./webp/IMG_0371.webp  800w,
+                    ./webp/IMG_0371.webp 1200w
+                  "
+                  sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                  alt="Tehran Streets"
+                  width="800"
+                  height="800"
+                  decoding="async"
+                  loading="lazy"
+                />
+                <figcaption class="gallery-caption">
+                  <span class="mono">07</span>
+                  <span>Tehran Streets</span>
+                </figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img
+                  src="./webp/IMG_0372.webp"
+                  srcset="
+                    ./webp/IMG_0372.webp  400w,
+                    ./webp/IMG_0372.webp  800w,
+                    ./webp/IMG_0372.webp 1200w
+                  "
+                  sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                  alt="Tehran Streets"
+                  width="800"
+                  height="800"
+                  decoding="async"
+                  loading="lazy"
+                />
+                <figcaption class="gallery-caption">
+                  <span class="mono">07</span>
+                  <span>Tehran Streets</span>
+                </figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img
+                  src="./webp/IMG_0443.webp"
+                  srcset="
+                    ./webp/IMG_0443.webp  400w,
+                    ./webp/IMG_0443.webp  800w,
+                    ./webp/IMG_0443.webp 1200w
+                  "
+                  sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                  alt="Unspoken"
+                  width="800"
+                  height="800"
+                  decoding="async"
+                  loading="lazy"
+                />
+                <figcaption class="gallery-caption">
+                  <span class="mono">07</span>
+                  <span>Unspoken</span>
+                </figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img
+                  src="./webp/IMG_0593.webp"
+                  srcset="
+                    ./webp/IMG_0593.webp  400w,
+                    ./webp/IMG_0593.webp  800w,
+                    ./webp/IMG_0593.webp 1200w
+                  "
+                  sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                  alt="Glass"
+                  width="800"
+                  height="800"
+                  decoding="async"
+                  loading="lazy"
+                />
+                <figcaption class="gallery-caption">
+                  <span class="mono">07</span>
+                  <span>Glass</span>
+                </figcaption>
+              </figure>
+              <figure class="gallery-item">
+                <img
+                  src="./webp/IMG_0595.webp"
+                  srcset="
+                    ./webp/IMG_0595.webp  400w,
+                    ./webp/IMG_0595.webp  800w,
+                    ./webp/IMG_0595.webp 1200w
+                  "
+                  sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                  alt="Shopping mall \ Tehran"
+                  width="800"
+                  height="800"
+                  decoding="async"
+                  loading="lazy"
+                />
+                <figcaption class="gallery-caption">
+                  <span class="mono">07</span>
+                  <span>Shopping mall \ Tehran</span>
+                </figcaption>
+              </figure>
+              <figure class="gallery-item">
+                <img
+                  src="./webp/IMG_0628.webp"
+                  srcset="
+                    ./webp/IMG_0628.webp  400w,
+                    ./webp/IMG_0628.webp  800w,
+                    ./webp/IMG_0628.webp 1200w
+                  "
+                  sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                  alt="Broken Window"
+                  width="800"
+                  height="800"
+                  decoding="async"
+                  loading="lazy"
+                />
+                <figcaption class="gallery-caption">
+                  <span class="mono">07</span>
+                  <span>Broken Window</span>
+                </figcaption>
+              </figure>
+              <figure class="gallery-item">
+                <img
+                  src="./webp/IMG_0630.webp"
+                  srcset="
+                    ./webp/IMG_0630.webp  400w,
+                    ./webp/IMG_0630.webp  800w,
+                    ./webp/IMG_0630.webp 1200w
+                  "
+                  sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                  alt="It Was a House"
+                  width="800"
+                  height="800"
+                  decoding="async"
+                  loading="lazy"
+                />
+                <figcaption class="gallery-caption">
+                  <span class="mono">07</span>
+                  <span>Left Behinde</span>
+                </figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img
+                  src="./webp/IMG_0651.webp"
+                  srcset="
+                    ./webp/IMG_0651.webp  400w,
+                    ./webp/IMG_0651.webp  800w,
+                    ./webp/IMG_0651.webp 1200w
+                  "
+                  sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                  alt="Horizon"
+                  width="800"
+                  height="800"
+                  decoding="async"
+                  loading="lazy"
+                />
+                <figcaption class="gallery-caption">
+                  <span class="mono">07</span>
+                  <span>The Circle Of Light</span>
+                </figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img
+                  src="./webp/IMG_0732.webp"
+                  srcset="
+                    ./webp/IMG_0732.webp  400w,
+                    ./webp/IMG_0732.webp  800w,
+                    ./webp/IMG_0732.webp 1200w
+                  "
+                  sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                  alt="North Of Iran"
+                  width="800"
+                  height="800"
+                  decoding="async"
+                  loading="lazy"
+                />
+                <figcaption class="gallery-caption">
+                  <span class="mono">07</span>
+                  <span>North Of Iran</span>
+                </figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img
+                  src="./webp/IMG_1145.webp"
+                  srcset="
+                    ./webp/IMG_1145.webp  400w,
+                    ./webp/IMG_1145.webp  800w,
+                    ./webp/IMG_1145.webp 1200w
+                  "
+                  sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                  alt="Danger Zone"
+                  width="800"
+                  height="800"
+                  decoding="async"
+                  loading="lazy"
+                />
+                <figcaption class="gallery-caption">
+                  <span class="mono">07</span>
+                  <span>Danger Zone ahead</span>
+                </figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img
+                  src="./webp/IMG_1155.webp"
+                  srcset="
+                    ./webp/IMG_1155.webp  400w,
+                    ./webp/IMG_1155.webp  800w,
+                    ./webp/IMG_1155.webp 1200w
+                  "
+                  sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                  alt="Fog"
+                  width="800"
+                  height="800"
+                  decoding="async"
+                  loading="lazy"
+                />
+                <figcaption class="gallery-caption">
+                  <span class="mono">07</span>
+                  <span>Fogs \ North of Iran</span>
+                </figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img
+                  src="./webp/IMG_1158.webp"
+                  srcset="
+                    ./webp/IMG_1158.webp  400w,
+                    ./webp/IMG_1158.webp  800w,
+                    ./webp/IMG_1158.webp 1200w
+                  "
+                  sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                  alt="Leaf"
+                  width="800"
+                  height="800"
+                  decoding="async"
+                  loading="lazy"
+                />
+                <figcaption class="gallery-caption">
+                  <span class="mono">07</span>
+                  <span>It's in Details</span>
+                </figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img
+                  src="./webp/IMG_1185.webp"
+                  srcset="
+                    ./webp/IMG_1185.webp  400w,
+                    ./webp/IMG_1185.webp  800w,
+                    ./webp/IMG_1185.webp 1200w
+                  "
+                  sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                  alt="Foggy Road"
+                  width="800"
+                  height="800"
+                  decoding="async"
+                  loading="lazy"
+                />
+                <figcaption class="gallery-caption">
+                  <span class="mono">07</span>
+                  <span>Foggy Road \ North</span>
+                </figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img
+                  src="./webp/IMG_1220.webp"
+                  srcset="
+                    ./webp/IMG_1220.webp  400w,
+                    ./webp/IMG_1220.webp  800w,
+                    ./webp/IMG_1220.webp 1200w
+                  "
+                  sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                  alt="Portrait Of Me"
+                  width="800"
+                  height="800"
+                  decoding="async"
+                  loading="lazy"
+                />
+                <figcaption class="gallery-caption">
+                  <span class="mono">07</span>
+                  <span>Alireza Ebrahimi </span>
+                </figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img
+                  src="./webp/IMG_1239.webp"
+                  srcset="
+                    ./webp/IMG_1239.webp  400w,
+                    ./webp/IMG_1239.webp  800w,
+                    ./webp/IMG_1239.webp 1200w
+                  "
+                  sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                  alt="North Of Iran"
+                  width="800"
+                  height="800"
+                  decoding="async"
+                  loading="lazy"
+                />
+                <figcaption class="gallery-caption">
+                  <span class="mono">07</span>
+                  <span>North</span>
+                </figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img
+                  src="./webp/IMG_1251.webp"
+                  srcset="
+                    ./webp/IMG_1251.webp  400w,
+                    ./webp/IMG_1251.webp  800w,
+                    ./webp/IMG_1251.webp 1200w
+                  "
+                  sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                  alt="a Single tree"
+                  width="800"
+                  height="800"
+                  decoding="async"
+                  loading="lazy"
+                />
+                <figcaption class="gallery-caption">
+                  <span class="mono">07</span>
+                  <span>On the Road to Heaven</span>
+                </figcaption>
+              </figure>
+
+              <figure class="gallery-item">
+                <img
+                  src="./webp/IMG_1283.webp"
+                  srcset="
+                    ./webp/IMG_1283.webp  400w,
+                    ./webp/IMG_1283.webp  800w,
+                    ./webp/IMG_1283.webp 1200w
+                  "
+                  sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                  alt="A bird flying"
+                  width="800"
+                  height="800"
+                  decoding="async"
+                  loading="lazy"
+                />
+                <figcaption class="gallery-caption">
+                  <span class="mono">07</span>
+                  <span>Fly away</span>
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+        </section>
+
+        <section class="gallery-cta section">
+          <div class="container">
+            <p class="contact-sub">
+              More frames coming soon. For prints or collaboration inquiries,
+              reach out.
+            </p>
+            <div class="contact-actions">
+              <a href="/#contact" class="btn btn-primary btn-lg page-link">
+                Get in touch
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="container footer-inner">
+          <p class="footer-copy mono">
+            © <span id="year"></span> Alireza Ebrahimi. All rights reserved.
+          </p>
+          <p class="footer-note">Built with intention.</p>
+        </div>
+      </footer>
+
+      <script src="/js/script.js" defer></script>
+    </div>
+  </body>
+</html>

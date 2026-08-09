@@ -1,5 +1,6 @@
 /* ============================================
    Portfolio — interactions (performance-tuned)
+   + Proper Intersection Observer scroll animations
    ============================================ */
 
 (function () {
@@ -42,7 +43,6 @@
   ];
 
   const container = document.getElementById("vikingBg");
-  // Fewer runes on mobile / save-data for faster paint
   const COUNT = prefersReducedMotion || saveData ? 0 : isMobile ? 18 : 36;
 
   function createRune() {
@@ -63,7 +63,6 @@
     container.appendChild(el);
   }
 
-  // Defer rune creation until after first paint
   if (container && COUNT > 0) {
     const spawn = () => {
       for (let i = 0; i < COUNT; i++) createRune();
@@ -75,7 +74,7 @@
     }
   }
 
-  // ===== Left fixed glyph rail (skip on mobile / reduced motion) =====
+  // ===== Left fixed glyph rail =====
   const rail = document.getElementById("glyphRail");
   if (rail && !isMobile && !prefersReducedMotion) {
     const RAIL_COUNT = 12;
@@ -121,7 +120,7 @@
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // ---------- Preloader (shorter, non-blocking) ----------
+  // ---------- Preloader ----------
   const preloader = document.getElementById("preloader");
   const countEl = document.getElementById("preloader-count");
   const progressEl = document.getElementById("preloader-progress");
@@ -138,7 +137,6 @@
   }
 
   function runPreloader() {
-    // Hard max 1.4s so first content paints sooner
     const hardTimeout = setTimeout(finishPreloader, 1400);
 
     if (!preloader || !countEl || !progressEl) {
@@ -172,7 +170,6 @@
     runPreloader();
   }
 
-  // Don't wait long for fonts — paint fast
   if (document.fonts && document.fonts.ready) {
     Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 280))])
       .then(startPreloaderSafely)
@@ -210,7 +207,7 @@
     });
   }
 
-  // ---------- Header scroll state (rAF throttled) ----------
+  // ---------- Header scroll state ----------
   const header = document.getElementById("header");
   let scrollTicking = false;
   function onScroll() {
@@ -225,48 +222,184 @@
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
-  // ---------- Scroll reveal (single observer) ----------
-  const revealEls = document.querySelectorAll(
-    ".section-header, .project, .about-left, .about-right, .contact .section-label, .contact-title, .contact-sub, .contact-actions, .contact-links, .gallery-intro, .gallery-cta",
-  );
-  revealEls.forEach((el) => el.classList.add("reveal"));
+  // =====================================================
+  // INTERSECTION OBSERVER — Scroll Animations (once only)
+  // =====================================================
+  function initScrollAnimations() {
+    if (prefersReducedMotion) {
+      document
+        .querySelectorAll(".reveal, .reveal-stagger")
+        .forEach((el) => el.classList.add("is-visible"));
+      return;
+    }
 
-  const projectList = document.querySelector(".project-list");
-  if (projectList) {
-    projectList.classList.add("reveal-stagger");
-    projectList
-      .querySelectorAll(".project")
-      .forEach((p) => p.classList.remove("reveal"));
-  }
+    const revealEls = document.querySelectorAll(
+      ".section-header, .project, .about-left, .about-right, .contact .section-label, .contact-title, .contact-sub, .contact-actions, .contact-links, .gallery-intro, .gallery-cta",
+    );
+    revealEls.forEach((el) => el.classList.add("reveal"));
 
-  const skillsList = document.querySelector(".skills-list");
-  if (skillsList) skillsList.classList.add("reveal-stagger");
+    const projectList = document.querySelector(".project-list");
+    if (projectList) {
+      projectList.classList.add("reveal-stagger");
+      projectList
+        .querySelectorAll(".project")
+        .forEach((p) => p.classList.remove("reveal"));
+    }
 
-  const galleryGrid = document.querySelector(".gallery-grid");
-  if (galleryGrid) {
-    galleryGrid.classList.add("reveal-stagger");
-  }
+    const skillsList = document.querySelector(".skills-list");
+    if (skillsList) skillsList.classList.add("reveal-stagger");
 
-  if ("IntersectionObserver" in window) {
     const observer = new IntersectionObserver(
-      (entries) => {
+      (entries, obs) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target);
+            obs.unobserve(entry.target); // fire ONLY once — never again
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
+    );
+
+    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+
+    const staggerObserver = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            obs.unobserve(entry.target);
           }
         });
       },
       { threshold: 0.08, rootMargin: "0px 0px -30px 0px" },
     );
-    document.querySelectorAll(".reveal, .reveal-stagger").forEach((el) => {
-      observer.observe(el);
+
+    document.querySelectorAll(".reveal-stagger").forEach((el) => {
+      staggerObserver.observe(el);
     });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initScrollAnimations);
   } else {
-    // Fallback: show everything
-    document.querySelectorAll(".reveal, .reveal-stagger").forEach((el) => {
-      el.classList.add("is-visible");
+    initScrollAnimations();
+  }
+
+  // =====================================================
+  // 3D HORIZONTAL GALLERY
+  // Images load once and stay loaded.
+  // Smooth 3D rotateY + scale based on distance from center.
+  // =====================================================
+  function init3DGallery() {
+    const track = document.getElementById("gallery3dTrack");
+    if (!track) return;
+
+    const items = Array.from(track.querySelectorAll(".gallery-3d-item"));
+    if (!items.length) return;
+
+    // Mark images as permanently loaded so browser does not re-fetch
+    items.forEach((item) => {
+      const img = item.querySelector("img");
+      if (img) {
+        // Once the image has loaded, keep it in memory
+        if (img.complete) {
+          img.dataset.loaded = "true";
+        } else {
+          img.addEventListener(
+            "load",
+            () => {
+              img.dataset.loaded = "true";
+            },
+            { once: true },
+          );
+        }
+      }
     });
+
+    let ticking = false;
+
+    function update3D() {
+      const trackRect = track.getBoundingClientRect();
+      const centerX = trackRect.left + trackRect.width / 2;
+
+      items.forEach((item) => {
+        const itemRect = item.getBoundingClientRect();
+        const itemCenter = itemRect.left + itemRect.width / 2;
+        const distance = itemCenter - centerX;
+        const maxDist = trackRect.width * 0.55;
+        const progress = Math.max(-1, Math.min(1, distance / maxDist));
+
+        // 3D transforms
+        const rotateY = progress * -42; // degrees
+        const scale = 1 - Math.abs(progress) * 0.18;
+        const translateZ = -Math.abs(progress) * 80;
+        const opacity = 1 - Math.abs(progress) * 0.45;
+
+        item.style.transform = `translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`;
+        item.style.opacity = String(Math.max(0.4, opacity));
+
+        // Active state for caption + brightness
+        if (Math.abs(progress) < 0.18) {
+          item.classList.add("is-active");
+        } else {
+          item.classList.remove("is-active");
+        }
+      });
+
+      ticking = false;
+    }
+
+    function onTrackScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update3D);
+    }
+
+    track.addEventListener("scroll", onTrackScroll, { passive: true });
+    window.addEventListener("resize", onTrackScroll, { passive: true });
+
+    // Initial paint
+    requestAnimationFrame(update3D);
+
+    // Optional: drag to scroll (desktop)
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    track.addEventListener("mousedown", (e) => {
+      isDown = true;
+      track.style.cursor = "grabbing";
+      startX = e.pageX - track.offsetLeft;
+      scrollLeft = track.scrollLeft;
+    });
+
+    track.addEventListener("mouseleave", () => {
+      isDown = false;
+      track.style.cursor = "grab";
+    });
+
+    track.addEventListener("mouseup", () => {
+      isDown = false;
+      track.style.cursor = "grab";
+    });
+
+    track.addEventListener("mousemove", (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - track.offsetLeft;
+      const walk = (x - startX) * 1.4;
+      track.scrollLeft = scrollLeft - walk;
+    });
+
+    track.style.cursor = "grab";
+  }
+
+  // Init 3D gallery after DOM ready
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init3DGallery);
+  } else {
+    init3DGallery();
   }
 
   // Hero entrance after preloader

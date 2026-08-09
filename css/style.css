@@ -1,5 +1,6 @@
 ﻿/* ============================================
    BOLD TYPOGRAPHY DESIGN SYSTEM — Portfolio
+   Optimized for speed + full responsiveness
    ============================================ */
 
 /* ---------- Design Tokens ---------- */
@@ -134,13 +135,12 @@ body {
   font-size: 2.8rem;
   opacity: 0;
   user-select: none;
-  will-change: transform, opacity, filter;
+  will-change: transform, opacity;
   animation: float linear infinite;
   transition: color 0.5s ease;
   text-shadow:
     0 0 6px rgba(255, 255, 255, 0.35),
     0 0 14px rgba(255, 61, 0, 0.18);
-  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.25));
 }
 
 .rune.dim {
@@ -149,7 +149,6 @@ body {
   text-shadow:
     0 0 4px rgba(255, 255, 255, 0.2),
     0 0 10px rgba(255, 61, 0, 0.12);
-  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.15));
 }
 
 @keyframes float {
@@ -217,7 +216,6 @@ body {
     color 0.2s ease,
     opacity 0.2s ease,
     text-shadow 0.2s ease;
-  will-change: contents, transform, opacity;
   user-select: none;
   line-height: 1;
 }
@@ -251,7 +249,6 @@ body {
   }
 }
 
-/* Hide glyph rail on very small screens to free space */
 @media (max-width: 480px) {
   .glyph-rail {
     display: none;
@@ -355,8 +352,8 @@ button {
   justify-content: center;
   background: var(--background);
   transition:
-    opacity 0.6s var(--ease),
-    visibility 0.6s var(--ease);
+    opacity 0.5s var(--ease),
+    visibility 0.5s var(--ease);
 }
 
 .preloader.is-done {
@@ -414,8 +411,8 @@ button {
   visibility: hidden;
   pointer-events: none;
   transition:
-    opacity 0.45s var(--ease),
-    visibility 0.45s var(--ease);
+    opacity 0.4s var(--ease),
+    visibility 0.4s var(--ease);
 }
 
 .page-transition.is-active {
@@ -809,7 +806,6 @@ button {
   margin-bottom: 1.25rem;
 }
 
-/* Hero title — slightly smaller, still one line on most screens */
 .hero-title {
   font-family: var(--font-sekuya);
   font-size: clamp(2rem, 8.5vw, 7.25rem);
@@ -839,7 +835,6 @@ button {
   color: var(--accent);
 }
 
-/* Extra-small phones: allow wrap if needed */
 @media (max-width: 360px) {
   .hero-title {
     font-size: clamp(1.75rem, 9vw, 2.4rem);
@@ -1302,7 +1297,7 @@ button {
 
 .gallery-title {
   font-family: var(--font-sekuya);
-  font-size: clamp(2.4rem, 8vw, 5.5rem);
+  font-size: clamp(2.2rem, 7.5vw, 5.2rem);
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.05;
@@ -1332,134 +1327,150 @@ button {
   color: var(--muted-foreground);
 }
 
-.gallery-grid-section {
+/* ========== 3D HORIZONTAL GALLERY ========== */
+.gallery-3d-section {
   border-top: 1px solid var(--border);
-  padding-top: 4rem;
+  padding-top: 3.5rem;
   padding-bottom: 2rem;
+  overflow: hidden;
 }
 
-/* Keep grid inside normal container so images are a bit smaller */
-.gallery-grid-section .container {
-  max-width: var(--container-max);
-  padding-inline: 1.25rem;
-}
-
-@media (min-width: 480px) {
-  .gallery-grid-section .container {
-    padding-inline: 1.5rem;
-  }
-}
-
-@media (min-width: 768px) {
-  .gallery-grid-section .container {
-    padding-inline: 3rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .gallery-grid-section .container {
-    padding-inline: 4rem;
-  }
-}
-
-.gallery-grid-section .section-header {
+.gallery-3d-section .section-header {
   margin-bottom: 2.5rem;
 }
 
 @media (min-width: 768px) {
-  .gallery-grid-section .section-header {
+  .gallery-3d-section .section-header {
     margin-bottom: 3.5rem;
   }
 }
 
-/* Slightly smaller cells + small gap between images */
-.gallery-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.75rem;
+.gallery-3d-wrapper {
+  perspective: 1200px;
+  perspective-origin: center center;
   width: 100%;
-  max-width: 980px; /* keeps photos a bit smaller overall */
-  margin-inline: auto;
-  padding: 0;
+  overflow: hidden;
+  padding-block: 2rem;
+}
+
+.gallery-3d-track {
+  display: flex;
+  gap: 1.5rem;
+  padding-inline: max(1.25rem, calc((100vw - 320px) / 2));
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  transform-style: preserve-3d;
+  padding-block: 1.5rem;
+}
+
+.gallery-3d-track::-webkit-scrollbar {
+  display: none;
 }
 
 @media (min-width: 640px) {
-  .gallery-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.875rem;
+  .gallery-3d-track {
+    gap: 2rem;
+    padding-inline: max(1.5rem, calc((100vw - 380px) / 2));
   }
 }
 
 @media (min-width: 1024px) {
-  .gallery-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    max-width: 100%;
+  .gallery-3d-track {
+    gap: 2.5rem;
+    padding-inline: max(2rem, calc((100vw - 420px) / 2));
   }
 }
 
-.gallery-item {
-  position: relative;
-  overflow: hidden;
-  background: var(--muted);
-  margin: 0;
-  padding: 0;
-  aspect-ratio: 1 / 1;
-  width: 100%;
-  content-visibility: auto;
-  contain-intrinsic-size: 1px 360px;
-  contain: layout paint style;
+.gallery-3d-item {
+  flex: 0 0 auto;
+  width: min(78vw, 320px);
+  scroll-snap-align: center;
+  transform-style: preserve-3d;
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, opacity, filter;
+  opacity: 0.55;
+  filter: brightness(0.75);
 }
 
-.gallery-item img {
+@media (min-width: 640px) {
+  .gallery-3d-item {
+    width: min(55vw, 380px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .gallery-3d-item {
+    width: min(42vw, 420px);
+  }
+}
+
+/* Active (center) item */
+.gallery-3d-item.is-active {
+  opacity: 1;
+  filter: brightness(1.05) contrast(1.05);
+  z-index: 2;
+}
+
+.gallery-3d-inner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #111;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+  transform-style: preserve-3d;
+}
+
+.gallery-3d-inner img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
-  transition: transform 0.55s var(--ease);
-  /* Hint browser to decode off main thread */
+  /* Prevent re-decode / reload */
   content-visibility: auto;
 }
 
-.gallery-item:hover img {
-  transform: scale(1.04);
-}
-
-.gallery-caption {
+.gallery-3d-caption {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.85rem 1rem;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, transparent 100%);
+  padding: 1rem 1.1rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
   font-size: var(--text-xs);
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
   color: #fff;
   opacity: 0;
-  transform: translateY(6px);
+  transform: translateY(10px);
   transition:
-    opacity 0.35s var(--ease),
-    transform 0.35s var(--ease);
+    opacity 0.4s ease,
+    transform 0.4s ease;
   pointer-events: none;
 }
 
-.gallery-item:hover .gallery-caption,
-.gallery-item:focus-within .gallery-caption {
+.gallery-3d-item.is-active .gallery-3d-caption {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Always show captions on touch devices */
-@media (hover: none) {
-  .gallery-caption {
-    opacity: 1;
-    transform: none;
-  }
+.gallery-3d-hint {
+  text-align: center;
+  margin-top: 1.25rem;
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+  opacity: 0.7;
 }
 
 .gallery-cta {
@@ -1474,13 +1485,35 @@ button {
   }
 }
 
-/* ---------- Scroll reveal ---------- */
+/* Mobile performance */
+@media (max-width: 768px) {
+  .rune {
+    text-shadow: none;
+    filter: none;
+    animation-duration: 30s !important;
+  }
+  .noise {
+    display: none;
+  }
+  .glyph-rail {
+    display: none;
+  }
+  .gallery-3d-item {
+    transition:
+      transform 0.35s ease,
+      opacity 0.35s ease;
+  }
+}
+
+/* ---------- Scroll reveal (Intersection Observer) ---------- */
 .reveal {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(22px);
   transition:
-    opacity 0.5s var(--ease),
-    transform 0.5s var(--ease);
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0s);
+  will-change: opacity, transform;
 }
 
 .reveal.is-visible {
@@ -1488,31 +1521,40 @@ button {
   transform: translateY(0);
 }
 
+/* (old grid gallery-item reveal removed — using 3D horizontal gallery now) */
+
+/* Stagger containers */
 .reveal-stagger > * {
   opacity: 0;
-  transform: translateY(16px);
+  transform: translateY(18px);
   transition:
-    opacity 0.5s var(--ease),
-    transform 0.5s var(--ease);
+    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .reveal-stagger.is-visible > *:nth-child(1) {
-  transition-delay: 0.05s;
+  transition-delay: 0.04s;
 }
 .reveal-stagger.is-visible > *:nth-child(2) {
-  transition-delay: 0.13s;
+  transition-delay: 0.1s;
 }
 .reveal-stagger.is-visible > *:nth-child(3) {
-  transition-delay: 0.21s;
+  transition-delay: 0.16s;
 }
 .reveal-stagger.is-visible > *:nth-child(4) {
-  transition-delay: 0.29s;
+  transition-delay: 0.22s;
 }
 .reveal-stagger.is-visible > *:nth-child(5) {
-  transition-delay: 0.37s;
+  transition-delay: 0.28s;
 }
 .reveal-stagger.is-visible > *:nth-child(6) {
-  transition-delay: 0.45s;
+  transition-delay: 0.34s;
+}
+.reveal-stagger.is-visible > *:nth-child(7) {
+  transition-delay: 0.4s;
+}
+.reveal-stagger.is-visible > *:nth-child(8) {
+  transition-delay: 0.46s;
 }
 
 .reveal-stagger.is-visible > * {
@@ -1541,8 +1583,15 @@ button {
 
   .reveal,
   .reveal-stagger > * {
-    opacity: 1;
-    transform: none;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .gallery-3d-item {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
   }
 
   .glyph-rail .rail-rune.is-glitch {
@@ -1552,6 +1601,12 @@ button {
   .page-transition {
     transition: none;
   }
+
+  .rune,
+  .rune.drift {
+    animation: none !important;
+    opacity: 0.35;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -1560,29 +1615,6 @@ button {
     --viking-bg-radial: #0a0a0a;
     --viking-glyph: #e8e8e8;
     --viking-glyph-dim: #666;
-  }
-}
-
-/* ---- Performance: lighten effects on small screens / reduce motion ---- */
-@media (max-width: 768px) {
-  .rune {
-    text-shadow: none;
-    filter: none;
-    animation-duration: 30s !important;
-  }
-  .noise {
-    display: none;
-  }
-  .glyph-rail {
-    display: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .rune,
-  .rune.drift {
-    animation: none !important;
-    opacity: 0.35;
   }
 }
 

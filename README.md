@@ -5,6 +5,13 @@ A personal portfolio built as **poster design translated to the web**. Typograph
 Pure **HTML · CSS · JavaScript**. No frameworks, no build step.
 
 ---
+<img width="1900" height="924" alt="image" src="https://github.com/user-attachments/assets/b866ec74-0884-47ac-bea4-9fb97658eb60" />
+
+---
+<img width="1893" height="910" alt="image" src="https://github.com/user-attachments/assets/bf95ab02-116b-4b1f-96df-e1e9387484fa" />
+
+
+---
 
 ## Features
 

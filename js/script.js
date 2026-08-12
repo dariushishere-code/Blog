@@ -1,12 +1,11 @@
 /* ============================================
    Portfolio — interactions (performance-tuned)
-   + Proper Intersection Observer scroll animations
+   Editorial dark theme · Viking rune background
    ============================================ */
 
 (function () {
   "use strict";
 
-  // Prefer reduced motion / save data
   const prefersReducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)",
   ).matches;
@@ -14,7 +13,7 @@
     (navigator.connection && navigator.connection.saveData) || false;
   const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
-  // ===== Viking Rune Background (lighter on mobile) =====
+  // ===== Viking Rune Background =====
   const runes = [
     "ᚠ",
     "ᚢ",
@@ -116,7 +115,7 @@
     );
   }
 
-  // ---------- Year in footer ----------
+  // ---------- Year ----------
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
@@ -131,13 +130,13 @@
     preloaderFinished = true;
     if (preloader) {
       preloader.classList.add("is-done");
-      setTimeout(() => preloader.setAttribute("aria-hidden", "true"), 500);
+      setTimeout(() => preloader.setAttribute("aria-hidden", "true"), 550);
     }
     document.body.classList.add("is-ready");
   }
 
   function runPreloader() {
-    const hardTimeout = setTimeout(finishPreloader, 1400);
+    const hardTimeout = setTimeout(finishPreloader, 1300);
 
     if (!preloader || !countEl || !progressEl) {
       clearTimeout(hardTimeout);
@@ -145,7 +144,7 @@
       return;
     }
 
-    const duration = 900;
+    const duration = 850;
     const start = performance.now();
 
     function tick(now) {
@@ -159,7 +158,7 @@
         requestAnimationFrame(tick);
       } else {
         clearTimeout(hardTimeout);
-        setTimeout(finishPreloader, 120);
+        setTimeout(finishPreloader, 100);
       }
     }
     requestAnimationFrame(tick);
@@ -171,7 +170,7 @@
   }
 
   if (document.fonts && document.fonts.ready) {
-    Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 280))])
+    Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 260))])
       .then(startPreloaderSafely)
       .catch(startPreloaderSafely);
   } else {
@@ -188,7 +187,7 @@
       once: true,
     });
   }
-  setTimeout(startPreloaderSafely, 200);
+  setTimeout(startPreloaderSafely, 180);
 
   // ---------- Mobile nav ----------
   const toggle = document.getElementById("nav-toggle");
@@ -207,7 +206,7 @@
     });
   }
 
-  // ---------- Header scroll state ----------
+  // ---------- Header scroll ----------
   const header = document.getElementById("header");
   let scrollTicking = false;
   function onScroll() {
@@ -215,16 +214,14 @@
     scrollTicking = true;
     requestAnimationFrame(() => {
       const y = window.scrollY || window.pageYOffset;
-      if (header) header.classList.toggle("is-scrolled", y > 24);
+      if (header) header.classList.toggle("is-scrolled", y > 20);
       scrollTicking = false;
     });
   }
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
-  // =====================================================
-  // INTERSECTION OBSERVER — Scroll Animations (once only)
-  // =====================================================
+  // ---------- Intersection Observer reveals ----------
   function initScrollAnimations() {
     if (prefersReducedMotion) {
       document
@@ -254,11 +251,11 @@
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("is-visible");
-            obs.unobserve(entry.target); // fire ONLY once — never again
+            obs.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
+      { threshold: 0.1, rootMargin: "0px 0px -36px 0px" },
     );
 
     document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
@@ -272,7 +269,7 @@
           }
         });
       },
-      { threshold: 0.08, rootMargin: "0px 0px -30px 0px" },
+      { threshold: 0.08, rootMargin: "0px 0px -28px 0px" },
     );
 
     document.querySelectorAll(".reveal-stagger").forEach((el) => {
@@ -286,11 +283,7 @@
     initScrollAnimations();
   }
 
-  // =====================================================
-  // 3D HORIZONTAL GALLERY
-  // Images load once and stay loaded.
-  // Smooth 3D rotateY + scale based on distance from center.
-  // =====================================================
+  // ---------- 3D Horizontal Gallery ----------
   function init3DGallery() {
     const track = document.getElementById("gallery3dTrack");
     if (!track) return;
@@ -298,11 +291,9 @@
     const items = Array.from(track.querySelectorAll(".gallery-3d-item"));
     if (!items.length) return;
 
-    // Mark images as permanently loaded so browser does not re-fetch
     items.forEach((item) => {
       const img = item.querySelector("img");
       if (img) {
-        // Once the image has loaded, keep it in memory
         if (img.complete) {
           img.dataset.loaded = "true";
         } else {
@@ -330,17 +321,15 @@
         const maxDist = trackRect.width * 0.55;
         const progress = Math.max(-1, Math.min(1, distance / maxDist));
 
-        // 3D transforms
-        const rotateY = progress * -42; // degrees
-        const scale = 1 - Math.abs(progress) * 0.18;
-        const translateZ = -Math.abs(progress) * 80;
-        const opacity = 1 - Math.abs(progress) * 0.45;
+        const rotateY = progress * -38;
+        const scale = 1 - Math.abs(progress) * 0.16;
+        const translateZ = -Math.abs(progress) * 70;
+        const opacity = 1 - Math.abs(progress) * 0.42;
 
         item.style.transform = `translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`;
-        item.style.opacity = String(Math.max(0.4, opacity));
+        item.style.opacity = String(Math.max(0.38, opacity));
 
-        // Active state for caption + brightness
-        if (Math.abs(progress) < 0.18) {
+        if (Math.abs(progress) < 0.16) {
           item.classList.add("is-active");
         } else {
           item.classList.remove("is-active");
@@ -358,11 +347,8 @@
 
     track.addEventListener("scroll", onTrackScroll, { passive: true });
     window.addEventListener("resize", onTrackScroll, { passive: true });
-
-    // Initial paint
     requestAnimationFrame(update3D);
 
-    // Optional: drag to scroll (desktop)
     let isDown = false;
     let startX;
     let scrollLeft;
@@ -388,32 +374,32 @@
       if (!isDown) return;
       e.preventDefault();
       const x = e.pageX - track.offsetLeft;
-      const walk = (x - startX) * 1.4;
+      const walk = (x - startX) * 1.35;
       track.scrollLeft = scrollLeft - walk;
     });
 
     track.style.cursor = "grab";
   }
 
-  // Init 3D gallery after DOM ready
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init3DGallery);
   } else {
     init3DGallery();
   }
 
-  // Hero entrance after preloader
+  // ---------- Hero entrance after preloader ----------
   const heroBits = [
     document.querySelector(".hero-label"),
     document.querySelector(".hero-title"),
     document.querySelector(".hero-sub"),
     document.querySelector(".hero-cta"),
+    document.querySelector(".hero-status"),
   ];
   heroBits.forEach((el, i) => {
     if (!el) return;
     el.style.opacity = "0";
-    el.style.transform = "translateY(14px)";
-    el.style.transition = `opacity 0.45s cubic-bezier(0.25,0,0,1) ${0.1 + i * 0.06}s, transform 0.45s cubic-bezier(0.25,0,0,1) ${0.1 + i * 0.06}s`;
+    el.style.transform = "translateY(12px)";
+    el.style.transition = `opacity 0.5s cubic-bezier(0.22,1,0.36,1) ${0.08 + i * 0.07}s, transform 0.5s cubic-bezier(0.22,1,0.36,1) ${0.08 + i * 0.07}s`;
   });
 
   const bodyObserver = new MutationObserver(() => {
@@ -431,7 +417,7 @@
     attributeFilter: ["class"],
   });
 
-  // ---------- Smooth page transitions ----------
+  // ---------- Page transitions ----------
   const transitionEl = document.getElementById("page-transition");
   function navigateWithTransition(href) {
     if (!transitionEl || prefersReducedMotion) {
@@ -442,7 +428,7 @@
     transitionEl.setAttribute("aria-hidden", "false");
     setTimeout(() => {
       window.location.href = href;
-    }, 320);
+    }, 300);
   }
 
   document.querySelectorAll("a.page-link").forEach((link) => {
@@ -455,4 +441,158 @@
   });
 
   if (transitionEl) transitionEl.classList.remove("is-active");
+
+  // =====================================================
+  // Contact section — topo mountains + soft particle mist
+  // =====================================================
+  function initContactFx() {
+    const section = document.getElementById("contact");
+    if (!section) return;
+
+    const topoIO = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            section.classList.add("is-topo-drawn");
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: "120px 0px", threshold: 0.02 },
+    );
+    topoIO.observe(section);
+
+    const canvas = document.getElementById("contact-fx");
+    if (!canvas || prefersReducedMotion || isMobile) return;
+
+    const ctx = canvas.getContext("2d", { alpha: true });
+    if (!ctx) return;
+
+    let w = 0;
+    let h = 0;
+    let dpr = Math.min(window.devicePixelRatio || 1, 1.75);
+    let particles = [];
+    let raf = 0;
+    let running = false;
+
+    const COUNT_P = 48;
+
+    function resize() {
+      const rect = section.getBoundingClientRect();
+      w = Math.max(1, Math.floor(rect.width));
+      h = Math.max(1, Math.floor(rect.height));
+      dpr = Math.min(window.devicePixelRatio || 1, 1.75);
+      canvas.width = Math.floor(w * dpr);
+      canvas.height = Math.floor(h * dpr);
+      canvas.style.width = w + "px";
+      canvas.style.height = h + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function makeParticle() {
+      return {
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: 0.6 + Math.random() * 2.2,
+        vx: (Math.random() - 0.5) * 0.28,
+        vy: -0.12 - Math.random() * 0.35,
+        a: 0.08 + Math.random() * 0.28,
+        life: 0.4 + Math.random() * 0.6,
+        hue: Math.random() > 0.55 ? 350 : 0,
+      };
+    }
+
+    function seed() {
+      particles = [];
+      for (let i = 0; i < COUNT_P; i++) particles.push(makeParticle());
+    }
+
+    function tick() {
+      if (!running) return;
+      ctx.clearRect(0, 0, w, h);
+
+      const g = ctx.createRadialGradient(
+        w * 0.5,
+        h * 0.15,
+        0,
+        w * 0.5,
+        h * 0.15,
+        Math.max(w, h) * 0.55,
+      );
+      g.addColorStop(0, "rgba(185, 23, 41, 0.07)");
+      g.addColorStop(0.45, "rgba(139, 15, 29, 0.03)");
+      g.addColorStop(1, "rgba(0, 0, 0, 0)");
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, w, h);
+
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.life -= 0.0018;
+
+        if (p.life <= 0 || p.y < -10 || p.x < -20 || p.x > w + 20) {
+          particles[i] = makeParticle();
+          particles[i].y = h + 8;
+          continue;
+        }
+
+        const alpha = Math.max(0, p.a * p.life);
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle =
+          p.hue > 0
+            ? `rgba(185, 23, 41, ${alpha})`
+            : `rgba(243, 237, 228, ${alpha * 0.55})`;
+        ctx.fill();
+      }
+
+      raf = requestAnimationFrame(tick);
+    }
+
+    function start() {
+      if (running) return;
+      running = true;
+      section.classList.add("is-fx-ready");
+      raf = requestAnimationFrame(tick);
+    }
+
+    function stop() {
+      running = false;
+      cancelAnimationFrame(raf);
+    }
+
+    resize();
+    seed();
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) start();
+          else stop();
+        });
+      },
+      { rootMargin: "80px 0px", threshold: 0.05 },
+    );
+    io.observe(section);
+
+    let resizeTimer = 0;
+    window.addEventListener(
+      "resize",
+      () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          resize();
+          seed();
+        }, 120);
+      },
+      { passive: true },
+    );
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initContactFx);
+  } else {
+    initContactFx();
+  }
 })();

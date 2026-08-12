@@ -17,6 +17,8 @@
     />
     <meta name="author" content="Alireza Ebrahimi" />
     <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="color-scheme" content="dark" />
     <meta property="og:type" content="website" />
     <meta
       property="og:title"
@@ -33,428 +35,447 @@
       content="https://alirezaebrahimi.tech/assets/preview.jpg"
     />
 
-    <!-- Favicon -->
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/favicon.svg" />
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;600;700&family=JetBrains+Mono:wght@400;500&family=Sekuya&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Sekuya&display=swap"
       rel="stylesheet"
     />
 
     <link rel="preload" href="/css/style.css" as="style" />
     <link rel="stylesheet" href="/css/style.css" />
   </head>
-  <body class="dark">
+  <body>
     <!-- Viking rune background -->
-    <div class="viking-bg" id="vikingBg"></div>
-
-    <!-- Left glyph rail -->
+    <div class="viking-bg" id="vikingBg" aria-hidden="true"></div>
     <div id="glyphRail" class="glyph-rail" aria-hidden="true"></div>
+    <div class="noise" aria-hidden="true"></div>
 
-    <div class="contentabove">
-      <!-- ========== PRELOADER ========== -->
-      <div id="preloader" class="preloader" aria-hidden="true">
-        <div class="preloader-inner">
-          <span class="preloader-number" id="preloader-count">00</span>
-          <div class="preloader-bar">
-            <div class="preloader-progress" id="preloader-progress"></div>
-          </div>
-          <p class="preloader-label">LOADING</p>
+    <!-- Preloader -->
+    <div id="preloader" class="preloader" aria-hidden="true">
+      <div class="preloader-inner">
+        <p class="preloader-chapter mono">00 · Entering</p>
+        <span class="preloader-number" id="preloader-count">00</span>
+        <div class="preloader-bar">
+          <div class="preloader-progress" id="preloader-progress"></div>
+        </div>
+        <p class="preloader-label">Assembling</p>
+      </div>
+    </div>
+
+    <div id="page-transition" class="page-transition" aria-hidden="true"></div>
+
+    <header class="site-header" id="header">
+      <div class="container header-inner">
+        <a href="#hero" class="logo">AE</a>
+
+        <div class="header-actions">
+          <nav class="nav" id="nav" aria-label="Primary">
+            <ul class="nav-list">
+              <li><a href="#work" class="nav-link">Work</a></li>
+              <li><a href="#about" class="nav-link">About</a></li>
+              <li>
+                <a href="/gallery.html" class="nav-link page-link">Gallery</a>
+              </li>
+              <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+          </nav>
+
+          <button
+            class="nav-toggle"
+            id="nav-toggle"
+            aria-label="Toggle menu"
+            aria-expanded="false"
+          >
+            <span class="nav-toggle-line"></span>
+            <span class="nav-toggle-line"></span>
+          </button>
         </div>
       </div>
+    </header>
 
-      <!-- ========== PAGE TRANSITION OVERLAY ========== -->
-      <div
-        id="page-transition"
-        class="page-transition"
-        aria-hidden="true"
-      ></div>
+    <main>
+      <!-- Hero -->
+      <section class="hero section" id="hero">
+        <div class="container">
+          <p class="hero-label mono">Frontend Developer</p>
 
-      <!-- ========== NOISE OVERLAY ========== -->
-      <div class="noise" aria-hidden="true"></div>
+          <h1 class="hero-title">
+            <span class="line">Alireza</span>
+            <span class="accent">Ebrahimi</span>
+          </h1>
 
-      <!-- ========== NAV ========== -->
-      <header class="site-header" id="header">
-        <div class="container header-inner">
-          <a href="#hero" class="logo" data-text="Alireza Ebrahimi | AE">AE</a>
+          <p class="hero-sub">
+            Building interfaces where type does the talking.<br
+              class="hide-mobile"
+            />
+            Precision, contrast, and deliberate space.
+          </p>
 
-          <div class="header-actions">
-            <nav class="nav" id="nav" aria-label="Primary">
-              <ul class="nav-list">
-                <li><a href="#work" class="nav-link">Work</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li>
-                  <a href="/gallery.html" class="nav-link page-link">Gallery</a>
-                </li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-              </ul>
-            </nav>
+          <div class="hero-cta">
+            <a href="#work" class="btn btn-primary">
+              View Work
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+            <a href="#contact" class="btn btn-ghost">Get in touch</a>
+          </div>
 
-            <button
-              class="nav-toggle"
-              id="nav-toggle"
-              aria-label="Toggle menu"
-              aria-expanded="false"
-            >
-              <span class="nav-toggle-line"></span>
-              <span class="nav-toggle-line"></span>
-            </button>
+          <div class="hero-status">
+            <span class="hero-status-dot" aria-hidden="true"></span>
+            <span>Available for work · 2026</span>
           </div>
         </div>
-      </header>
+      </section>
 
-      <main>
-        <!-- ========== HERO ========== -->
-        <section class="hero section" id="hero">
-          <div class="container">
-            <p class="hero-label mono">Frontend Developer</p>
+      <!-- Work -->
+      <section class="work section" id="work">
+        <div class="container">
+          <header class="section-header">
+            <p class="section-label mono">Selected Work</p>
+            <h2 class="section-title">Projects</h2>
+          </header>
 
-            <h1 class="hero-title">
-              <span class="line">Alireza</span>
-              <span class="accent">Ebrahimi</span>
-            </h1>
-
-            <p class="hero-sub">
-              Building interfaces where type does the talking.<br
-                class="hide-mobile"
-              />
-              Precision, contrast, and deliberate space.
-            </p>
-
-            <div class="hero-cta">
-              <a href="#work" class="btn btn-primary">
-                View Work
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
+          <div class="project-list">
+            <article class="project">
+              <a
+                href="https://github.com/dariushishere-code/Goldmarketplace"
+                class="project-link"
+                target="_blank"
+                rel="noopener"
+              >
+                <div class="project-meta">
+                  <span class="project-index mono">01</span>
+                  <span class="project-year mono">2025</span>
+                </div>
+                <h3 class="project-title">Aureum — Gold Marketplace</h3>
+                <p class="project-desc">
+                  A Next.js + Tailwind CSS storefront concept for a gold
+                  marketplace (bars, coins, jewelry, antique pieces), in a black
+                  / gold / ivory theme.
+                </p>
+                <ul class="project-tags">
+                  <li>Next.js</li>
+                  <li>Tailwind Css</li>
+                  <li>Design System</li>
+                </ul>
+                <span class="project-arrow" aria-hidden="true">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                  >
+                    <path d="M7 17L17 7M17 7H7M17 7V17" />
+                  </svg>
+                </span>
               </a>
-              <a href="#contact" class="btn btn-ghost">Get in touch</a>
-            </div>
-          </div>
+            </article>
 
-          <div class="hero-decor" aria-hidden="true">
-            <span></span>
-          </div>
-        </section>
-
-        <!-- ========== WORK / PROJECTS ========== -->
-        <section class="work section" id="work">
-          <div class="container">
-            <header class="section-header">
-              <p class="section-label mono">Selected Work</p>
-              <h2 class="section-title">Projects</h2>
-            </header>
-
-            <div class="project-list">
-              <!-- Project 1 -->
-              <article class="project">
-                <a
-                  href="https://github.com/dariushishere-code/Goldmarketplace"
-                  class="project-link"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  <div class="project-meta">
-                    <span class="project-index mono">01</span>
-                    <span class="project-year mono">2025</span>
-                  </div>
-                  <h3 class="project-title">Aureum — Gold Marketplace</h3>
-                  <p class="project-desc">
-                    A Next.js + Tailwind CSS storefront concept for a gold
-                    marketplace (bars, coins, jewelry, antique pieces), in a
-                    black / gold / ivory theme.
-                  </p>
-                  <ul class="project-tags">
-                    <li>Next.js</li>
-                    <li>Tailwind Css</li>
-                    <li>Design System</li>
-                  </ul>
-                  <span class="project-arrow" aria-hidden="true">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.5"
-                    >
-                      <path d="M7 17L17 7M17 7H7M17 7V17" />
-                    </svg>
-                  </span>
-                </a>
-              </article>
-
-              <!-- Project 2 -->
-              <article class="project">
-                <a
-                  href="https://github.com/dariushishere-code/simpleportfolio"
-                  class="project-link"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  <div class="project-meta">
-                    <span class="project-index mono">02</span>
-                    <span class="project-year mono">2025</span>
-                  </div>
-                  <h3 class="project-title">Simple Portfolio</h3>
-                  <p class="project-desc">
-                    A statically-generated Next.js site: fast, SEO-friendly,
-                    deployable to Netlify with zero server config. Includes a
-                    working blog you can publish to from a browser-based admin
-                    panel — no code editor required once it's set up.
-                  </p>
-                  <ul class="project-tags">
-                    <li>Next.js</li>
-                    <li>React</li>
-                    <li>Browser based admin panel</li>
-                  </ul>
-                  <span class="project-arrow" aria-hidden="true">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.5"
-                    >
-                      <path d="M7 17L17 7M17 7H7M17 7V17" />
-                    </svg>
-                  </span>
-                </a>
-              </article>
-
-              <!-- Project 3 -->
-              <article class="project">
-                <a
-                  href="https://github.com/dariushishere-code/services-ui"
-                  class="project-link"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  <div class="project-meta">
-                    <span class="project-index mono">03</span>
-                    <span class="project-year mono">2026</span>
-                  </div>
-                  <h3 class="project-title">Service UI</h3>
-                  <p class="project-desc">
-                    A pixel-close recreation of a light-themed salon /
-                    barbershop Services + Order interface using only HTML and
-                    CSS.
-                  </p>
-                  <ul class="project-tags">
-                    <li>HTML</li>
-                    <li>CSS</li>
-                    <li>Service Design</li>
-                  </ul>
-                  <span class="project-arrow" aria-hidden="true">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.5"
-                    >
-                      <path d="M7 17L17 7M17 7H7M17 7V17" />
-                    </svg>
-                  </span>
-                </a>
-              </article>
-
-              <!-- Project 4 -->
-              <article class="project">
-                <a
-                  href="https://github.com/dariushishere-code/spotify-search-app"
-                  class="project-link"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  <div class="project-meta">
-                    <span class="project-index mono">04</span>
-                    <span class="project-year mono">2025</span>
-                  </div>
-                  <h3 class="project-title">Spotify Search app</h3>
-                  <p class="project-desc">
-                    A full-stack Spotify search application built with:
-                  </p>
-                  <ul class="project-tags">
-                    <li>HTML / CSS</li>
-                    <li>JavaScript</li>
-                    <li>Node.js</li>
-                    <li>Express.js</li>
-                    <li>Spotify Web API</li>
-                  </ul>
-                  <span class="project-arrow" aria-hidden="true">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.5"
-                    >
-                      <path d="M7 17L17 7M17 7H7M17 7V17" />
-                    </svg>
-                  </span>
-                </a>
-              </article>
-            </div>
-          </div>
-        </section>
-
-        <!-- ========== ABOUT ========== -->
-        <section class="about section" id="about">
-          <div class="container about-grid">
-            <div class="about-left">
-              <p class="section-label mono">About</p>
-              <h2 class="section-title">
-                Making digital<br />feel intentional
-              </h2>
-            </div>
-
-            <div class="about-right">
-              <p class="about-lead">
-                Dynamic front-end developer with a passion for creating seamless
-                and engaging user experiences. Proficient in HTML, CSS,
-                JavaScript, and modern frameworks like React, I leverage my
-                strong problem-solving skills to transform complex design
-                concepts into responsive, interactive web applications.
-              </p>
-              <p class="about-body">
-                I believe that continuous learning, strong teamwork, and
-                professional dedication are essential for building successful
-                software products. Let’s build the future together!
-              </p>
-
-              <div class="about-stats">
-                <div class="stat">
-                  <span class="stat-number mono">01</span>
-                  <span class="stat-label">Years experience</span>
+            <article class="project">
+              <a
+                href="https://github.com/dariushishere-code/simpleportfolio"
+                class="project-link"
+                target="_blank"
+                rel="noopener"
+              >
+                <div class="project-meta">
+                  <span class="project-index mono">02</span>
+                  <span class="project-year mono">2025</span>
                 </div>
-                <div class="stat">
-                  <span class="stat-number mono">02</span>
-                  <span class="stat-label">Shipped projects</span>
-                </div>
-                <div class="stat">
-                  <span class="stat-number mono">05</span>
-                  <span class="stat-label">Design systems</span>
-                </div>
-              </div>
+                <h3 class="project-title">Simple Portfolio</h3>
+                <p class="project-desc">
+                  A statically-generated Next.js site: fast, SEO-friendly,
+                  deployable to Netlify with zero server config. Includes a
+                  working blog you can publish to from a browser-based admin
+                  panel — no code editor required once it's set up.
+                </p>
+                <ul class="project-tags">
+                  <li>Next.js</li>
+                  <li>React</li>
+                  <li>Browser based admin panel</li>
+                </ul>
+                <span class="project-arrow" aria-hidden="true">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                  >
+                    <path d="M7 17L17 7M17 7H7M17 7V17" />
+                  </svg>
+                </span>
+              </a>
+            </article>
 
-              <div class="about-skills">
-                <p class="skills-label mono">Focus</p>
-                <ul class="skills-list">
+            <article class="project">
+              <a
+                href="https://github.com/dariushishere-code/services-ui"
+                class="project-link"
+                target="_blank"
+                rel="noopener"
+              >
+                <div class="project-meta">
+                  <span class="project-index mono">03</span>
+                  <span class="project-year mono">2026</span>
+                </div>
+                <h3 class="project-title">Service UI</h3>
+                <p class="project-desc">
+                  A pixel-close recreation of a light-themed salon / barbershop
+                  Services + Order interface using only HTML and CSS.
+                </p>
+                <ul class="project-tags">
                   <li>HTML</li>
                   <li>CSS</li>
-                  <li>JavaScript</li>
-                  <li>React / Next.js</li>
-                  <li>Responsive Design</li>
-                  <li>Performance</li>
+                  <li>Service Design</li>
                 </ul>
-              </div>
-            </div>
+                <span class="project-arrow" aria-hidden="true">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                  >
+                    <path d="M7 17L17 7M17 7H7M17 7V17" />
+                  </svg>
+                </span>
+              </a>
+            </article>
+
+            <article class="project">
+              <a
+                href="https://github.com/dariushishere-code/spotify-search-app"
+                class="project-link"
+                target="_blank"
+                rel="noopener"
+              >
+                <div class="project-meta">
+                  <span class="project-index mono">04</span>
+                  <span class="project-year mono">2025</span>
+                </div>
+                <h3 class="project-title">Spotify Search app</h3>
+                <p class="project-desc">
+                  A full-stack Spotify search application built with:
+                </p>
+                <ul class="project-tags">
+                  <li>HTML / CSS</li>
+                  <li>JavaScript</li>
+                  <li>Node.js</li>
+                  <li>Express.js</li>
+                  <li>Spotify Web API</li>
+                </ul>
+                <span class="project-arrow" aria-hidden="true">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                  >
+                    <path d="M7 17L17 7M17 7H7M17 7V17" />
+                  </svg>
+                </span>
+              </a>
+            </article>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <!-- ========== CONTACT ========== -->
-        <section class="contact section" id="contact">
-          <div class="container">
-            <p class="section-label mono">Contact</p>
-            <h2 class="section-title contact-title">
-              Let’s build<br />something sharp
-            </h2>
+      <!-- About -->
+      <section class="about section" id="about">
+        <div class="container about-grid">
+          <div class="about-left">
+            <p class="section-label mono">About</p>
+            <h2 class="section-title">Making digital<br />feel intentional</h2>
+          </div>
 
-            <p class="contact-sub">
-              Open to new collaborations, Remote full-time roles, and thoughtful
-              side projects.
+          <div class="about-right">
+            <p class="about-lead">
+              Dynamic front-end developer with a passion for creating seamless
+              and engaging user experiences. Proficient in HTML, CSS,
+              JavaScript, and modern frameworks like React, I leverage my strong
+              problem-solving skills to transform complex design concepts into
+              responsive, interactive web applications.
+            </p>
+            <p class="about-body">
+              I believe that continuous learning, strong teamwork, and
+              professional dedication are essential for building successful
+              software products. Let’s build the future together!
             </p>
 
-            <div class="contact-actions">
-              <a
-                href="mailto:contact@alirezaebrahimi.tech"
-                class="btn btn-primary btn-lg"
-              >
-                contact@alirezaebrahimi.tech
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                >
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-              </a>
+            <div class="about-stats">
+              <div class="stat">
+                <span class="stat-number mono">01</span>
+                <span class="stat-label">Years experience</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number mono">02</span>
+                <span class="stat-label">Shipped projects</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number mono">05</span>
+                <span class="stat-label">Design systems</span>
+              </div>
             </div>
 
-            <div class="contact-links">
-              <a
-                href="https://x.com/alirezaebdev"
-                class="contact-link"
-                target="_blank"
-                rel="noopener"
-              >
-                <span class="mono">X</span>
-                <span class="underline"></span>
-              </a>
-              <a
-                href="https://www.linkedin.com/in/alirezaebrahimi-dev/"
-                class="contact-link"
-                target="_blank"
-                rel="noopener"
-              >
-                <span class="mono">LinkedIn</span>
-                <span class="underline"></span>
-              </a>
-              <a
-                href="https://github.com/dariushishere-code"
-                class="contact-link"
-                target="_blank"
-                rel="noopener"
-              >
-                <span class="mono">GitHub</span>
-                <span class="underline"></span>
-              </a>
-              <a
-                href="/resume/AlirezaEbrahimiCv.pdf"
-                class="contact-link"
-                target="_blank"
-                rel="noopener"
-              >
-                <span class="mono">Read.cv</span>
-                <span class="underline"></span>
-              </a>
+            <div class="about-skills">
+              <p class="skills-label mono">Focus</p>
+              <ul class="skills-list">
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>React / Next.js</li>
+                <li>Responsive Design</li>
+                <li>Performance</li>
+              </ul>
             </div>
           </div>
-        </section>
-      </main>
-
-      <!-- ========== FOOTER ========== -->
-      <footer class="site-footer">
-        <div class="container footer-inner">
-          <p class="footer-copy mono">
-            © <span id="year"></span> Alireza Ebrahimi. All rights reserved.
-          </p>
-          <p class="footer-note">Built with intention.</p>
         </div>
-      </footer>
+      </section>
 
-      <script src="/js/script.js" defer></script>
-    </div>
+      <!-- Contact -->
+      <section class="contact section" id="contact">
+        <!-- Topographic mountains (draw-on animation) -->
+        <div class="bg-mountains" aria-hidden="true">
+          <svg
+            viewBox="0 0 1920 600"
+            preserveAspectRatio="xMidYMax slice"
+            fill="none"
+            stroke="#5A0711"
+            stroke-width="1.4"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              opacity="0.45"
+              d="M -20 310 C 80 250, 180 230, 260 250 C 340 270, 420 200, 520 230 C 600 250, 700 190, 820 220 C 920 250, 1020 200, 1140 240 C 1240 270, 1360 210, 1480 240 C 1580 260, 1700 220, 1820 250 C 1880 260, 1940 290, 1940 310"
+            />
+            <path
+              opacity="0.65"
+              d="M -20 400 C 100 360, 220 330, 340 360 C 440 380, 560 310, 680 340 C 780 360, 900 320, 1040 360 C 1160 390, 1280 330, 1420 360 C 1540 380, 1660 340, 1800 370 C 1880 390, 1940 400, 1940 400"
+            />
+            <path
+              opacity="0.9"
+              d="M -20 500 C 120 470, 260 450, 400 470 C 520 490, 660 450, 800 480 C 920 500, 1060 460, 1200 490 C 1320 510, 1460 470, 1600 490 C 1740 510, 1860 480, 1940 500"
+            />
+            <path
+              opacity="0.28"
+              stroke-dasharray="2 6"
+              d="M 180 180 C 420 140, 680 220, 940 190"
+            />
+            <path
+              opacity="0.28"
+              stroke-dasharray="2 6"
+              d="M 1040 150 C 1260 110, 1480 200, 1780 160"
+            />
+          </svg>
+        </div>
+
+        <!-- Soft particle / mist canvas -->
+        <canvas id="contact-fx" class="contact-fx" aria-hidden="true"></canvas>
+
+        <div class="container contact-inner">
+          <p class="section-label mono">Contact</p>
+          <h2 class="section-title contact-title">
+            Let’s build<br />something sharp
+          </h2>
+
+          <p class="contact-sub">
+            Open to new collaborations, Remote full-time roles, and thoughtful
+            side projects.
+          </p>
+
+          <div class="contact-actions">
+            <a
+              href="mailto:contact@alirezaebrahimi.tech"
+              class="btn btn-primary btn-lg"
+            >
+              contact@alirezaebrahimi.tech
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+
+          <div class="contact-links">
+            <a
+              href="https://x.com/alirezaebdev"
+              class="contact-link"
+              target="_blank"
+              rel="noopener"
+            >
+              <span class="mono">X</span>
+              <span class="underline"></span>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/alirezaebrahimi-dev/"
+              class="contact-link"
+              target="_blank"
+              rel="noopener"
+            >
+              <span class="mono">LinkedIn</span>
+              <span class="underline"></span>
+            </a>
+            <a
+              href="https://github.com/dariushishere-code"
+              class="contact-link"
+              target="_blank"
+              rel="noopener"
+            >
+              <span class="mono">GitHub</span>
+              <span class="underline"></span>
+            </a>
+            <a
+              href="/resume/AlirezaEbrahimiCv.pdf"
+              class="contact-link"
+              target="_blank"
+              rel="noopener"
+            >
+              <span class="mono">Read.cv</span>
+              <span class="underline"></span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p class="footer-copy mono">
+          © <span id="year"></span> Alireza Ebrahimi. All rights reserved.
+        </p>
+        <p class="footer-note">Built with intention.</p>
+      </div>
+    </footer>
+
+    <script src="/js/script.js" defer></script>
   </body>
 </html>

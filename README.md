@@ -1,71 +1,58 @@
-# Bold Typography Portfolio
+# Alireza Ebrahimi — Portfolio
 
-A personal portfolio built as **poster design translated to the web**. Typography is the visual language—color exists for contrast, space frames letterforms, and interaction reveals typographic detail.
+**Maximalism / Dopamine** redesign of a bilingual (EN · FA) frontend portfolio.
 
-Pure **HTML · CSS · JavaScript**. No frameworks, no build step.
-
----
-<img width="1900" height="924" alt="image" src="https://github.com/user-attachments/assets/b866ec74-0884-47ac-bea4-9fb97658eb60" />
-
----
-<img width="1893" height="910" alt="image" src="https://github.com/user-attachments/assets/bf95ab02-116b-4b1f-96df-e1e9387484fa" />
-
+A dark, high-energy personal site for a frontend developer & photographer. The visual language rejects minimal restraint in favor of color rotation, stacked shadows, pattern layering, and playful motion — while keeping the original structure, i18n, and interactions intact.
 
 ---
 
-## Features
+## Design system: Maximalism / Dopamine
 
-- **Bold type system** — extreme scale contrast (up to ~8rem heroes), tight tracking on display, wide tracking on labels
-- **Dark & light themes** — toggle in the header; preference saved to `localStorage` and respects `prefers-color-scheme`
-- **Animated preloader** — mono counter + accent progress bar before content appears
-- **Scroll reveals** — fade + slide-up on sections (respects `prefers-reduced-motion`)
-- **Responsive** — mobile-first layout, adaptive type, hamburger nav under 768px
-- **Accessible** — WCAG-minded contrast, visible focus rings, 44px touch targets, semantic structure
-- **Zero border-radius** — sharp edges only, matching the typographic voice
-- **Subtle grain** — fractal noise overlay for tactile depth
+### Philosophy
 
----
+**More is more.** Empty space is treated as wasted opportunity. Patterns clash on purpose, accents rotate section by section, and interactive elements overshoot on hover. The emotional target is euphoric, Y2K-meets-hyperpop, digital maximalism — without sacrificing readability or accessibility on critical text.
 
-## Quick start
+### Color tokens
 
-```bash
-# Clone
-git clone https://github.com/dariushishere-code/Blog.git
-cd Blog
+| Token | Hex | Role |
+|--------|-----|------|
+| Background | `#0D0D1A` | Deep cosmic purple-black |
+| Foreground | `#FFFFFF` | Primary text (AAA contrast) |
+| Muted surface | `#2D1B4E` | Cards, elevated panels |
+| **Accent** (magenta) | `#FF3AF2` | Primary energy |
+| **Secondary** (cyan) | `#00F5D4` | Digital glow |
+| **Tertiary** (yellow) | `#FFE600` | Attention / active states |
+| **Quaternary** (orange) | `#FF6B35` | Warm chaos |
+| **Quinary** (purple) | `#7B2FFF` | Mystical depth |
 
-# Open in browser (or serve locally)
-open index.html
-# or
-npx serve .
-```
+**Section rotation:** major sections cycle accents (hero → magenta, work → cyan, about → yellow/orange, contact → orange, gallery → yellow/purple). Borders intentionally clash with backgrounds (e.g. yellow border on magenta areas).
 
-No install or build required. Edit the files and refresh.
+### Typography
 
----
+| Role | Family | Notes |
+|------|--------|--------|
+| Headings | **Outfit** | 700–900, tight tracking, multi-layer text shadows |
+| Body | **DM Sans** | Readable in busy layouts |
+| Display / accent | **Bangers** | Sparingly, if needed |
+| Mono / HUD | **JetBrains Mono** | Labels, codes, EN/FA switch |
+| Persian (RTL) | **Vazirmatn** | Body + display when `lang="fa"` |
 
-### Theme
+Hero name and key titles use **stacked text shadows** (purple → magenta → cyan) and, on accent words, **animated gradient text**.
 
-Theme is controlled by `data-theme` on `<html>`:
+### Borders, shadows, patterns
 
-- `"dark"` — near-black background, warm white text (default design system)
-- `"light"` — inverted surfaces, slightly deeper vermillion for contrast
+- Borders: mostly `4px`–`6px`, solid or dashed; colors from the accent set
+- Shadows: hard offset stacks (`6px/12px` in two colors) + soft colored glows
+- Global layers: fixed dot grid + diagonal stripes + radial mesh on `body`
+- Cards / gallery frames: thick accent borders + multi-layer box shadows, rotating by index
 
-Users can switch via the sun/moon button. Choice persists in `localStorage` under the key `theme`.
+### Motion
 
-### Colors (design tokens)
-
-Defined in `styles.css` under `:root` / `[data-theme="dark"]` and `[data-theme="light"]`:
-
-| Token                | Dark      | Light     |
-| -------------------- | --------- | --------- |
-| `--background`       | `#0A0A0A` | `#FAFAFA` |
-| `--foreground`       | `#FAFAFA` | `#0A0A0A` |
-| `--muted`            | `#1A1A1A` | `#F0F0F0` |
-| `--muted-foreground` | `#737373` | `#525252` |
-| `--accent`           | `#FF3D00` | `#E63600` |
-| `--border`           | `#262626` | `#E5E5E5` |
-
-Accent is used sparingly: headlines, underlines, key CTAs, and focus rings.
+- Float / bounce / wiggle on decorative shapes
+- Pulse-glow on primary CTAs
+- Gradient-shift on hero name and header scan line
+- Scroll reveals and 3D gallery transforms preserved from the original build
+- All continuous animation respects `prefers-reduced-motion`
 
 ---
 
@@ -73,29 +60,80 @@ Accent is used sparingly: headlines, underlines, key CTAs, and focus rings.
 
 ```
 .
-├── index.html    # Markup + early theme script (prevents flash)
-├── styles.css    # Design tokens, layout, components, themes
-├── script.js     # Preloader, theme toggle, nav, scroll reveals
+├── index.html          # Home: hero, work, about, contact
+├── gallery.html        # Photography gallery (horizontal 3D track)
+├── style.css           # Design tokens + full layout & RTL
+├── script.js           # i18n, preloader, gallery, FX, nav
 └── README.md
 ```
 
+Production may map CSS/JS under `/css/` and `/js/`; local preview uses relative `./style.css` and `./script.js`.
+
+Gallery images are expected under `./webp/` (referenced by `gallery.html`).
+
 ---
 
-## Design principles
+## Features
 
-1. **Type as hero** — headlines are the visual centerpiece, not decoration
-2. **Extreme scale contrast** — large gap between H1 and body
-3. **Deliberate negative space** — generous section padding frames the type
-4. **Strict hierarchy** — eye flows headline → subhead → body → action
-5. **Restrained palette** — black, white, one accent
+- **Bilingual EN / FA** with `localStorage` persistence and a short page transition on switch
+- **RTL layout** when Persian is active (`dir="rtl"`, Vazirmatn, mirrored nav/hover, no forced uppercase on Persian copy)
+- **Hero name i18n:** `Alireza` / `Ebrahimi` → `علیرضا` / `ابراهیمی`
+- Preloader, fixed header, mobile drawer nav
+- Viking rune background + left glyph rail (desktop)
+- Cursor soft light + hero flashlight (desktop, motion allowed)
+- Work list, about stats, contact topo + particle mist
+- Horizontal scroll / drag **3D gallery** with per-frame accent borders
+- Accessible focus rings (double ring using accent + cyan)
 
-Motion is fast and decisive (`cubic-bezier(0.25, 0, 0, 1)`, 150–500ms). Primary buttons are text with an animated underline—no filled pills.
+---
 
-Fonts loaded from Google Fonts:
+## Getting started
 
-- **Inter Tight** / **Inter** — UI and headlines
-- **Playfair Display** — optional display/serif moments
-- **JetBrains Mono** — labels, stats, preloader
+1. Serve the folder over HTTP (needed for some fonts and consistent behavior):
+
+   ```bash
+   npx serve .
+   # or: python -m http.server 8080
+   ```
+
+2. Open `index.html` in the browser.
+3. Toggle **EN / FA** in the header to verify layout and copy.
+
+No build step: plain HTML, CSS, and JS.
+
+---
+
+## Customization
+
+### Tokens
+
+All core colors, type scales, and radii live in `:root` at the top of `style.css`. Change accents there to re-theme the site.
+
+### Copy & languages
+
+Strings are in `script.js` under `translations.en` and `translations.fa`.  
+Keys are applied via `data-i18n="…"`. Add a key in both locales and on the element to extend i18n.
+
+Hero name:
+
+```html
+<span class="line" data-i18n="hero.name1">Alireza</span>
+<span class="accent" data-i18n="hero.name2">Ebrahimi</span>
+```
+
+### Section accent
+
+Section border and label colors are set per block in CSS (e.g. `.work`, `.about`, `.contact`). Adjust those rules to change the rotation order.
+
+---
+
+## Accessibility
+
+- Primary text stays white on `#0D0D1A` (high contrast)
+- Accent colors are decorative / labels, not sole carriers of meaning
+- Focus: `outline` + offset ring in contrasting accents
+- `prefers-reduced-motion: reduce` disables continuous animations and simplifies transitions
+- Decorative shapes and pattern layers use `aria-hidden` where appropriate
 
 ---
 
@@ -103,19 +141,18 @@ Fonts loaded from Google Fonts:
 
 Modern evergreen browsers (Chrome, Firefox, Safari, Edge). Uses:
 
-- CSS custom properties
-- `color-mix()` for header backdrop (graceful fallback)
-- `IntersectionObserver` for reveals
-- `matchMedia` + `localStorage` for theme
-
----
-
-## License
-
-use it, fork it, make it yours.
+- CSS custom properties, `color-mix`, logical properties (`inset-inline`, etc.)
+- `backdrop-filter` on the header
+- Canvas for contact particles (skipped on mobile / reduced motion)
 
 ---
 
 ## Credits
 
-Design system inspired by editorial and poster typography. Built to be readable in the source and easy to extend.
+- Design direction: **Maximalism / Dopamine** system (color rotation, stacked shadows, pattern abundance)
+- Site content & structure: Alireza Ebrahimi portfolio
+- Fonts: [Outfit](https://fonts.google.com/specimen/Outfit), [DM Sans](https://fonts.google.com/specimen/DM+Sans), [JetBrains Mono](https://fonts.google.com/specimen/JetBrains+Mono), [Vazirmatn](https://fonts.google.com/specimen/Vazirmatn) via Google Fonts
+
+---
+
+**Built with intention — and a little chaos.**

@@ -1,0 +1,12 @@
+{
+  "name": "portfoliomyself",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Workspace entrypoint — the React/Vite portfolio lives in ./Blog. These scripts forward there.",
+  "scripts": {
+    "dev": "npm --prefix Blog run dev",
+    "build": "npm --prefix Blog run build",
+    "preview": "npm --prefix Blog run preview",
+    "typecheck": "npm --prefix Blog run typecheck"
+  }
+}

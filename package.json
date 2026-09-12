@@ -1,12 +1,26 @@
 {
-  "name": "portfoliomyself",
-  "private": true,
+  "name": "kima-portfolio",
   "version": "1.0.0",
-  "description": "Workspace entrypoint — the React/Vite portfolio lives in ./Blog. These scripts forward there.",
+  "private": true,
+  "description": "Kima Davidson — premium minimalist digital designer portfolio (Next.js 15 + Tailwind CSS v4 + Framer Motion)",
   "scripts": {
-    "dev": "npm --prefix Blog run dev",
-    "build": "npm --prefix Blog run build",
-    "preview": "npm --prefix Blog run preview",
-    "typecheck": "npm --prefix Blog run typecheck"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "framer-motion": "^12.43.0",
+    "next": "^15.5.25",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^22.20.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.9.3"
   }
 }

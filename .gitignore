@@ -1,13 +1,16 @@
 # Dependencies
-node_modules/
+/node_modules
 .pnp
 .pnp.js
 
+# Next.js build output
+/.next
+/out
+next-env.d.ts
+
 # Build outputs
-dist/
-build/
-.out/
-coverage/
+/build
+/coverage
 
 # Logs
 *.log
@@ -37,5 +40,5 @@ pnpm-debug.log*
 Thumbs.db
 Desktop.ini
 
-# Backups / one-off scratch
-_vite-template-backup/
+# TypeScript
+*.tsbuildinfo

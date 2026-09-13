@@ -28,7 +28,23 @@ export default function Experience() {
                 <h3 className="text-xl font-medium tracking-tight text-ink">
                   {entry.role}
                 </h3>
-                <p className="mt-1 text-sm text-neutral-500">{entry.org}</p>
+                <p className="mt-1 text-sm text-neutral-400">{entry.org}</p>
+                {entry.points ? (
+                  <ul className="mt-4 max-w-xl space-y-2.5">
+                    {entry.points.map((point) => (
+                      <li
+                        key={point}
+                        className="flex gap-3 text-sm leading-relaxed text-neutral-400"
+                      >
+                        <span
+                          className="mt-2 h-1 w-1 shrink-0 rounded-full bg-neutral-400"
+                          aria-hidden="true"
+                        />
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
               </div>
             </div>
           </Reveal>

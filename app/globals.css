@@ -4,15 +4,19 @@
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-serif: var(--font-instrument), "Georgia", serif;
 
-  --color-paper: #faf9f6;
-  --color-ink: #161513;
-  --color-hairline: #e8e4dc;
-  --color-accent: #1cb35c;
+  /* Dark theme tokens */
+  --color-paper: #0a0a0b;
+  --color-panel: #131315;
+  --color-ink: #f4f2ec;
+  --color-hairline: #232227;
+  --color-muted: #a3a19b;
+  --color-accent: #35d17f;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
+    color-scheme: dark;
   }
 
   body {
@@ -20,7 +24,7 @@
   }
 
   ::selection {
-    background: var(--color-ink);
+    background: var(--color-accent);
     color: var(--color-paper);
   }
 }

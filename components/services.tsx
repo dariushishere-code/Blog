@@ -30,7 +30,7 @@ export default function Services() {
                 <h3 className="text-3xl font-medium tracking-tight text-ink sm:text-4xl">
                   {service.title}
                 </h3>
-                <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-neutral-500">
+                <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-neutral-400">
                   {service.desc}
                 </p>
               </div>
@@ -39,7 +39,7 @@ export default function Services() {
                 <span className="font-serif text-[11px] italic text-neutral-400 sm:mb-4 sm:block">
                   {service.tags.join("  ·  ")}
                 </span>
-                <ArrowUpRight className="h-7 w-7 text-neutral-300 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-ink" />
+                <ArrowUpRight className="h-7 w-7 text-neutral-600 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-ink" />
               </div>
             </div>
           </Reveal>

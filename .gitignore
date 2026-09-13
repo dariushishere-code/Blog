@@ -42,3 +42,16 @@ Desktop.ini
 
 # TypeScript
 *.tsbuildinfo
+
+# Netlify
+/.netlify
+
+# Vercel (if you ever switch hosts)
+/.vercel
+.vercel
+
+# Local AI tooling state (Claude Code etc.) — remove if you want to track it
+.claude/
+
+# Abort/request logs
+.continuous-log.txt

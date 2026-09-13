@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { clients, navLinks, profile, stats } from "@/lib/content";
-import { ArrowUpRight } from "./icons";
+import { languages, navLinks, profile, stats } from "@/lib/content";
+import { ArrowRight, ArrowUpRight } from "./icons";
+import { LiquidMetalButton } from "./ui/liquid-metal";
 
 export default function Sidebar() {
   return (
@@ -17,7 +18,7 @@ export default function Sidebar() {
             <a
               key={link.href}
               href={link.href}
-              className="text-[13px] text-neutral-500 transition-colors hover:text-ink"
+              className="text-[13px] text-neutral-400 transition-colors hover:text-ink"
             >
               {link.label}
             </a>
@@ -26,19 +27,21 @@ export default function Sidebar() {
 
         {/* Profile */}
         <div className="mt-10 lg:mt-12">
-          <Image
-            src={profile.image}
-            alt={`Portrait of ${profile.name}`}
-            width={112}
-            height={112}
-            priority
-            className="h-[112px] w-[112px] rounded-full object-cover grayscale"
-          />
+          <div className="relative h-[120px] w-[120px] overflow-hidden rounded-full border border-hairline shadow-[0_0_0_1px_rgba(255,255,255,0.06)]">
+            <Image
+              src="/profile.jpg"
+              alt={`${profile.name} — portrait photo`}
+              fill
+              priority
+              sizes="120px"
+              className="object-cover"
+            />
+          </div>
           <h1 className="mt-7 text-[2.6rem] font-medium leading-[0.98] tracking-tight text-ink sm:text-6xl">
             {profile.name}
           </h1>
           <p className="eyebrow mt-4 text-neutral-500">{profile.title}</p>
-          <p className="mt-6 max-w-sm text-[15px] leading-relaxed text-neutral-600">
+          <p className="mt-6 max-w-sm text-[15px] leading-relaxed text-neutral-400">
             {profile.intro}
           </p>
         </div>
@@ -49,29 +52,43 @@ export default function Sidebar() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-50" />
             <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-accent" />
           </span>
-          <span className="text-sm text-neutral-600">Available for work.</span>
+          <span className="text-sm text-neutral-400">{profile.status}.</span>
         </div>
 
         {/* CTA */}
-        <a
+        <LiquidMetalButton
           href={`mailto:${profile.email}`}
-          className="group mt-6 inline-flex items-center justify-center gap-2.5 rounded-full bg-ink px-7 py-3.5 text-sm font-medium text-paper transition-opacity duration-300 hover:opacity-85"
+          size="sm"
+          className="mt-6"
+          icon={<ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-0.5" />}
+          metalConfig={{ colorBack: "#35d17f", colorTint: "#86efac" }}
         >
           Get in touch
-          <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        </LiquidMetalButton>
+
+        <a
+          href={profile.resumeUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="group mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-neutral-400 underline-offset-4 transition-colors hover:text-ink hover:underline"
+        >
+          Résumé (PDF)
+          <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </a>
 
-        {/* Clients */}
+        {/* Languages */}
         <div className="mt-12">
-          <p className="eyebrow text-neutral-400">Trusted by</p>
+          <p className="eyebrow text-neutral-500">Languages</p>
           <div className="mt-5 flex flex-wrap items-center gap-x-7 gap-y-3">
-            {clients.map((client) => (
-              <span
-                key={client}
-                className="whitespace-nowrap text-[13px] font-semibold tracking-[0.18em] text-neutral-400"
-              >
-                {client}
-              </span>
+            {languages.map((language) => (
+              <div key={language.name} className="whitespace-nowrap">
+                <span className="text-[13px] font-semibold tracking-[0.18em] text-neutral-400">
+                  {language.name.toUpperCase()}
+                </span>
+                <span className="ml-2 text-[11px] tracking-[0.18em] text-neutral-500">
+                  {language.level}
+                </span>
+              </div>
             ))}
           </div>
         </div>
@@ -79,7 +96,7 @@ export default function Sidebar() {
         {/* About */}
         <div className="mt-12">
           <h2 className="eyebrow text-ink">About</h2>
-          <p className="mt-4 text-[15px] leading-relaxed text-neutral-600">
+          <p className="mt-4 text-[15px] leading-relaxed text-neutral-400">
             {profile.about}
           </p>
         </div>
@@ -104,7 +121,7 @@ export default function Sidebar() {
         </dl>
 
         {/* Footer */}
-        <p className="mt-12 pb-2 text-xs text-neutral-400">
+        <p className="mt-12 pb-2 text-xs text-neutral-500">
           © 2026 {profile.name} — {profile.title}
         </p>
       </div>

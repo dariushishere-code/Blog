@@ -3,8 +3,9 @@ import Works from "@/components/works";
 import Services from "@/components/services";
 import Stack from "@/components/stack";
 import Experience from "@/components/experience";
-import Awards from "@/components/awards";
-import Testimonials from "@/components/testimonials";
+import Education from "@/components/education";
+import Capabilities from "@/components/capabilities";
+import Faq from "@/components/faq";
 import Contact from "@/components/contact";
 
 export default function Home() {
@@ -16,8 +17,9 @@ export default function Home() {
         <Services />
         <Stack />
         <Experience />
-        <Awards />
-        <Testimonials />
+        <Education />
+        <Capabilities />
+        <Faq />
         <Contact />
       </main>
     </div>

@@ -27,7 +27,7 @@ export default function SectionHeading({
         {title}
       </h2>
       {description ? (
-        <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-neutral-500">
+        <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-neutral-400">
           {description}
         </p>
       ) : null}

@@ -20,7 +20,7 @@ export default function Stack() {
       <div className="mt-10 flex flex-wrap gap-3">
         {stack.map((tool, i) => (
           <Reveal key={tool} delay={i * 0.05}>
-            <span className="inline-flex items-center rounded-full border border-hairline px-5 py-2.5 text-sm text-neutral-600 transition-colors duration-300 hover:border-ink hover:text-ink">
+            <span className="inline-flex items-center rounded-full border border-hairline px-5 py-2.5 text-sm text-neutral-400 transition-colors duration-300 hover:border-ink hover:text-ink">
               {tool}
             </span>
           </Reveal>

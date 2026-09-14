@@ -29,15 +29,20 @@ npm run typecheck  # tsc --noEmit
 
 ## Deploying to Netlify
 
-`netlify.toml` is already configured:
+`netlify.toml` and the `@netlify/plugin-nextjs` dev dependency are already
+configured — the plugin handles the Next.js build, ISR and image optimization
+at deploy time, so **do not** pass `--dir`. From the repo root:
 
 ```bash
 npm run build
-npx netlify deploy --prod --dir=.next
+npx netlify deploy --prod
 ```
 
-Or connect the repo in the Netlify dashboard — the build command, Node version
-and `@netlify/plugin-nextjs` are picked up automatically.
+> Using the CLI for the very first time? Run `npx netlify login` and
+> `npx netlify init` once to link this folder to your Netlify site.
+
+Or simply connect the repo in the Netlify dashboard — the build command,
+Node version and plugin are picked up automatically.
 
 ## Project structure
 

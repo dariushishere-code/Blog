@@ -1,7 +1,4 @@
-"use client";
-
 import { useRef } from "react";
-import Image from "next/image";
 import { works } from "@/lib/content";
 import SectionHeading from "./section-heading";
 import { ArrowRight } from "./icons";
@@ -72,12 +69,11 @@ export default function Works() {
             >
               {/* Uniform 16/9 image box — object-cover keeps every card identical */}
               <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl border border-hairline bg-panel">
-                <Image
+                <img
                   src={work.src}
                   alt={work.alt}
-                  fill
-                  sizes="(min-width: 1024px) 320px, (min-width: 640px) 280px, 72vw"
-                  className="object-cover transition-all duration-700 ease-out group-hover:scale-[1.06]"
+                  loading="lazy"
+                  className="absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-[1.06]"
                 />
                 {/* Hover overlay for impact */}
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />

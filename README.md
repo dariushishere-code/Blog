@@ -1,6 +1,6 @@
 # Alireza Ebrahimi — Portfolio
 
-A premium, dark-themed front-end developer portfolio built with **Next.js 15 (App Router) + Tailwind CSS v4 + Framer Motion**, deployed on **Netlify**.
+A premium, dark-themed front-end developer portfolio built with **React 19 + Vite + Tailwind CSS v4 + Framer Motion**, deployed on **Netlify**.
 
 ## Design
 
@@ -21,17 +21,17 @@ A premium, dark-themed front-end developer portfolio built with **Next.js 15 (Ap
 
 ```bash
 npm install
-npm run dev        # http://localhost:3000
-npm run build      # production build
-npm start          # serve production build
+npm run dev        # http://localhost:3000 (Vite dev server)
+npm run build      # typecheck + production build → dist/
+npm run preview    # serve the production build locally
 npm run typecheck  # tsc --noEmit
 ```
 
 ## Deploying to Netlify
 
-`netlify.toml` and the `@netlify/plugin-nextjs` dev dependency are already
-configured — the plugin handles the Next.js build, ISR and image optimization
-at deploy time, so **do not** pass `--dir`. From the repo root:
+`netlify.toml` is already configured — build command `npm run build`, publish
+directory `dist`, plus a catch-all SPA redirect so `/gallery` (and any unknown
+route) serves the app shell. From the repo root:
 
 ```bash
 npm run build
@@ -41,37 +41,43 @@ npx netlify deploy --prod
 > Using the CLI for the very first time? Run `npx netlify login` and
 > `npx netlify init` once to link this folder to your Netlify site.
 
-Or simply connect the repo in the Netlify dashboard — the build command,
-Node version and plugin are picked up automatically.
+Or simply connect the repo in the Netlify dashboard — the build command and
+publish directory are picked up automatically.
 
 ## Project structure
 
 ```
-app/
-  layout.tsx         # fonts, metadata, dark theme base
-  page.tsx           # page composition (sidebar + sections)
-  gallery/page.tsx   # photo archive
-  globals.css        # Tailwind v4 theme tokens (dark palette)
-components/
-  sidebar.tsx        # sticky left column with portrait photo
-  works.tsx          # horizontal scroll project rail
-  faq.tsx            # accessible 6-question accordion
-  services.tsx       # numbered services
-  stack.tsx          # tools
-  experience.tsx     # timeline + bullet points
-  education.tsx      # education list
-  capabilities.tsx   # focus areas, toolbox, languages
-  contact.tsx        # reach out + socials
-lib/
-  content.ts         # all editable content (profile, projects, copy)
+index.html           # HTML shell, fonts, SEO + Open Graph metadata
+vite.config.ts       # Vite config (@ alias → src/)
 public/
+  icon.svg           # favicon
   profile.jpg        # portrait photo (sidebar + Open Graph)
+src/
+  main.tsx           # React root — BrowserRouter + global styles
+  App.tsx            # routes (/, /gallery, 404) + dotted background
+  index.css          # Tailwind v4 theme tokens (dark palette)
+  pages/
+    Home.tsx         # page composition (sidebar + sections)
+    Gallery.tsx      # photo archive
+    NotFound.tsx     # 404 fallback
+  components/
+    sidebar.tsx      # sticky left column with portrait photo
+    works.tsx        # horizontal scroll project rail
+    faq.tsx          # accessible 6-question accordion
+    services.tsx     # numbered services
+    stack.tsx        # tools
+    experience.tsx   # timeline + bullet points
+    education.tsx    # education list
+    capabilities.tsx # focus areas, toolbox, languages
+    contact.tsx      # reach out + socials
+    ui/              # dot pattern + liquid metal shader button
+  lib/
+    content.ts       # all editable content (profile, projects, copy)
 ```
 
 ## Content
 
-Everything editable lives in `lib/content.ts` — profile, works, services, stack,
-experience, education, focus, toolbox, languages, socials, FAQs and the gallery.
-Gallery images are served from `dev.alirezaebrahimi.tech/webp/` (configured via
-`next.config.ts` → `images.remotePatterns`); works images from
-`images.unsplash.com` and `github.com/user-attachments/`.
+Everything editable lives in `src/lib/content.ts` — profile, works, services,
+stack, experience, education, focus, toolbox, languages, socials, FAQs and the
+gallery. Gallery images are served from `dev.alirezaebrahimi.tech/webp/`; works
+images from `images.unsplash.com` and `github.com/user-attachments/`.

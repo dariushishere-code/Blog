@@ -1,4 +1,4 @@
-"use client";
+
 
 import { stack } from "@/lib/content";
 import Reveal from "./reveal";

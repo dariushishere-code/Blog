@@ -1,6 +1,4 @@
-"use client";
-
-import Image from "next/image";
+import { Link } from "react-router";
 import { languages, navLinks, profile, stats } from "@/lib/content";
 import { ArrowRight, ArrowUpRight } from "./icons";
 import { LiquidMetalButton } from "./ui/liquid-metal";
@@ -12,29 +10,38 @@ export default function Sidebar() {
       className="no-scrollbar shrink-0 border-hairline lg:sticky lg:top-0 lg:h-screen lg:w-[430px] lg:overflow-y-auto lg:border-r xl:w-[470px]"
     >
       <div className="px-5 py-8 sm:px-8 lg:px-10 lg:py-14">
-        {/* Anchor nav */}
+        {/* Anchor nav — section links keep native anchors, pages use the router */}
         <nav className="flex flex-wrap gap-x-6 gap-y-2 border-b border-hairline pb-6">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-[13px] text-neutral-400 transition-colors hover:text-ink"
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) =>
+            link.href.startsWith("/") ? (
+              <Link
+                key={link.href}
+                to={link.href}
+                className="text-[13px] text-neutral-400 transition-colors hover:text-ink"
+              >
+                {link.label}
+              </Link>
+            ) : (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-[13px] text-neutral-400 transition-colors hover:text-ink"
+              >
+                {link.label}
+              </a>
+            )
+          )}
         </nav>
 
         {/* Profile */}
         <div className="mt-10 lg:mt-12">
           <div className="relative h-[120px] w-[120px] overflow-hidden rounded-full border border-hairline shadow-[0_0_0_1px_rgba(255,255,255,0.06)]">
-            <Image
+            <img
               src="/profile.jpg"
               alt={`${profile.name} — portrait photo`}
-              fill
-              priority
-              sizes="120px"
-              className="object-cover"
+              width={912}
+              height={1136}
+              className="absolute inset-0 h-full w-full object-cover"
             />
           </div>
           <h1 className="mt-7 text-[2.6rem] font-medium leading-[0.98] tracking-tight text-ink sm:text-6xl">

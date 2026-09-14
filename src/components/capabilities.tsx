@@ -1,4 +1,4 @@
-"use client";
+
 
 import { focus, languages, nowLine, toolbox } from "@/lib/content";
 import Reveal from "./reveal";

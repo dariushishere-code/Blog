@@ -1,4 +1,4 @@
-"use client";
+
 
 import { experience } from "@/lib/content";
 import Reveal from "./reveal";

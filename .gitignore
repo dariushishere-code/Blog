@@ -9,6 +9,7 @@
 next-env.d.ts
 
 # Build outputs
+/dist
 /build
 /coverage
 

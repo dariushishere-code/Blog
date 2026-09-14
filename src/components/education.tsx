@@ -1,4 +1,4 @@
-"use client";
+
 
 import { education } from "@/lib/content";
 import Reveal from "./reveal";

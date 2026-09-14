@@ -1,4 +1,4 @@
-"use client";
+
 
 import { services } from "@/lib/content";
 import Reveal from "./reveal";

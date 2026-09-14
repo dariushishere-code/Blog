@@ -1,4 +1,4 @@
-"use client";
+
 
 import React, { memo, forwardRef } from "react";
 import { LiquidMetal as LiquidMetalShader } from "@paper-design/shaders-react";

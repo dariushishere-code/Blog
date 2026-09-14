@@ -1,21 +1,13 @@
-import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
+import { Link } from "react-router";
 import { gallery, profile } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "Photo archive — Alireza Ebrahimi",
-  description:
-    "A personal photo archive by Alireza Ebrahimi — photography moments collected over the years, in slow orbit.",
-};
-
-export default function GalleryPage() {
+export default function Gallery() {
   return (
     <main className="min-h-screen px-5 py-10 sm:px-8 lg:px-14 lg:py-16 xl:px-20">
       <header className="max-w-3xl">
         <nav>
           <Link
-            href="/"
+            to="/"
             className="eyebrow text-neutral-400 transition-colors hover:text-ink"
           >
             ← Back to portfolio
@@ -37,14 +29,13 @@ export default function GalleryPage() {
             key={`${image.alt}-${image.src}`}
             className="mb-5 break-inside-avoid overflow-hidden rounded-2xl border border-hairline bg-neutral-800/60 md:mb-6"
           >
-            <Image
+            <img
               src={image.src}
               alt={image.alt}
               width={700}
               height={1000}
-              sizes="(min-width: 1280px) 25vw, (min-width: 720px) 33vw, (min-width: 640px) 50vw, 100vw"
-              className="h-auto w-full object-cover transition-transform duration-700 ease-out hover:scale-[1.03]"
               loading="lazy"
+              className="h-auto w-full object-cover transition-transform duration-700 ease-out hover:scale-[1.03]"
             />
           </figure>
         ))}

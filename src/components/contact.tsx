@@ -1,4 +1,4 @@
-"use client";
+
 
 import { profile, socials } from "@/lib/content";
 import Reveal from "./reveal";

@@ -1,17 +1,20 @@
-# Netlify build configuration for the Next.js portfolio
+# Netlify build configuration for the React (Vite) portfolio
 [build]
   command = "npm run build"
+  publish = "dist"
 
 [build.environment]
   NODE_VERSION = "22"
 
-# Official Next.js runtime for Netlify (islands, ISR, image optimization)
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
+# SPA fallback — /gallery and any unknown route serve the app shell
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
 
-# Long-lived cache for hashed Next.js static assets
+# Long-lived cache for hashed Vite static assets
 [[headers]]
-  for = "/_next/static/*"
+  for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 

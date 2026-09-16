@@ -4,6 +4,9 @@
   "private": true,
   "description": "Alireza Ebrahimi — front-end developer portfolio (React 19 + Vite + Tailwind CSS v4 + Framer Motion)",
   "type": "module",
+  "engines": {
+    "node": ">=22.22.0"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",

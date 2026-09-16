@@ -4,7 +4,10 @@
   publish = "dist"
 
 [build.environment]
-  NODE_VERSION = "22"
+  # Pinned to an exact Node 22 patch: Vite 8/rolldown requires >=22.12.0 and
+  # react-router@8 requires >=22.22.0, so a floating "22" can resolve to an
+  # older patch on Netlify's build image and break the build.
+  NODE_VERSION = "22.23.2"
 
 # SPA fallback — /gallery and any unknown route serve the app shell
 [[redirects]]

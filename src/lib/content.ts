@@ -57,6 +57,18 @@ export type Work = {
 
 export const works: Work[] = [
   {
+    title: "Lumen — English Learning Platform",
+    year: "2026",
+    category: "Full-Stack / EdTech",
+    description:
+      "An AI-powered English learning platform with personalized lessons, speech recognition for pronunciation practice, spaced repetition vocabulary system, and real-time progress tracking — built with modern React ecosystem.",
+    tags: ["React", "TypeScript", "AI / LLM", "Speech API", "Tailwind CSS"],
+    url: "https://github.com/dariushishere-code/LumenEnglishLearning",
+    src: u("photo-1516321318423-f06f85e504b3"),
+    alt: "Lumen — AI-powered English learning platform",
+    aspect: "aspect-[16/11]",
+  },
+  {
     title: "Savoria — Recipe Platform",
     year: "2026",
     category: "Full-Stack / AI",

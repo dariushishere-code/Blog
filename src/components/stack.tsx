@@ -1,31 +1,39 @@
 
 
-import { stack } from "@/lib/content";
 import Reveal from "./reveal";
 import SectionHeading from "./section-heading";
+import { stack } from "@/lib/content";
+import { LogoSlider } from "./ui/logo-slider";
 
 export default function Stack() {
   return (
     <section id="stack" className="scroll-mt-10 pt-24 lg:pt-32">
-      <SectionHeading
-        index="03"
-        eyebrow="Stack"
-        title={
-          <>
-            Tools I <span className="font-serif italic font-normal">use</span>
-          </>
-        }
-      />
-
-      <div className="mt-10 flex flex-wrap gap-3">
-        {stack.map((tool, i) => (
-          <Reveal key={tool} delay={i * 0.05}>
-            <span className="inline-flex items-center rounded-full border border-hairline px-5 py-2.5 text-sm text-neutral-400 transition-colors duration-300 hover:border-ink hover:text-ink">
-              {tool}
-            </span>
-          </Reveal>
-        ))}
+      <div className="flex flex-wrap items-end justify-between gap-5">
+        <SectionHeading
+          index="04"
+          eyebrow="Stack & languages"
+          title={
+            <>
+              What I <span className="editorial-serif italic text-accent">work with</span>
+            </>
+          }
+        />
+        <p className="eyebrow mb-1 text-muted">A few of my everyday tools</p>
       </div>
+
+      <Reveal className="mt-8">
+        <LogoSlider
+          logos={stack.map((technology) => (
+            <span key={technology} className="logo-slider-wordmark">
+              {technology}
+            </span>
+          ))}
+          speed={38}
+          pauseOnHover
+          className="-mx-5 w-[calc(100%+2.5rem)] sm:mx-0 sm:w-full"
+          label="Technologies I work with"
+        />
+      </Reveal>
     </section>
   );
 }

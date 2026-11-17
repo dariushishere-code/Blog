@@ -1,15 +1,12 @@
-const u = (id: string, w = 1200) =>
-  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=80`;
-
 export const profile = {
   name: "Alireza Ebrahimi",
   title: "Front-End Developer",
-  tagline: "Building sharp interfaces that stay forever sharp.",
-  taglineRest: "Precision, contrast, deliberate space — and a camera.",
+  tagline: "Thoughtful interfaces, built to hold up.",
+  taglineRest: "Design systems · front-end · creative code",
   intro:
-    "Front-end developer & photographer — I build sharp, accessible interfaces, then hunt every bug until nothing breaks.",
+    "Front-end developer crafting accessible interfaces, thoughtful interactions, and playful digital worlds.",
   about:
-    "Front-end developer focused on the intersection of typography, motion and engineering. I ship accessible, fast interfaces and treat every pixel as a decision — then stress-test them until they stay sharp and hold up forever. When something breaks, I love diving into the bug and fixing it for good. Outside the editor I shoot photography: light, composition and patience that find their way into every interface I build.",
+    "I’m Alireza, a front-end developer who cares as much about how a product feels as how it works. I turn ideas into accessible, responsive interfaces with thoughtful typography, considered motion, and code built to last. I enjoy solving the details behind the scenes—from performance and edge cases to the bugs nobody else can reproduce. Away from the screen, photography keeps my eye tuned to light, color, and composition.",
   email: "iamalirezaebrahimii@gmail.com",
   location: "Remote · Worldwide",
   site: "alirezaebrahimi.tech",
@@ -22,11 +19,10 @@ export const profile = {
 };
 
 export const navLinks = [
+  { label: "About", href: "#about" },
   { label: "Work", href: "#work" },
   { label: "Services", href: "#services" },
   { label: "Experience", href: "#experience" },
-  { label: "Education", href: "#education" },
-  { label: "Gallery", href: "/gallery" },
   { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },
 ];
@@ -38,9 +34,8 @@ export const languages = [
 ];
 
 export const stats = [
-  { value: "09", label: "Public projects" },
+  { value: "12", label: "Public projects" },
   { value: "03", label: "Spoken languages" },
-  { value: "62", label: "Photos in the archive" },
 ];
 
 export type Work = {
@@ -50,12 +45,30 @@ export type Work = {
   description: string;
   tags: string[];
   url: string;
-  src: string;
-  alt: string;
-  aspect: string;
+  artwork?: "tower" | "ledger" | "market" | "terminal";
 };
 
 export const works: Work[] = [
+  {
+    title: "Expense Tracker",
+    year: "2026",
+    category: "Personal Finance",
+    description:
+      "A personal finance dashboard for managing transactions, wallets, recurring reminders, budgets, and spending trends, with CSV import/export and local persistence.",
+    tags: ["React", "TypeScript", "Redux Toolkit", "Recharts", "Tailwind CSS"],
+    url: "https://github.com/dariushishere-code/expense-tracker2",
+    artwork: "ledger",
+  },
+  {
+    title: "Product Finder",
+    year: "2026",
+    category: "E-commerce",
+    description:
+      "A product discovery app with category and price filters, debounced search, related-product recommendations, a cart, and saved preferences.",
+    tags: ["React", "Fake Store API", "Search", "Local Storage"],
+    url: "https://github.com/dariushishere-code/productstore",
+    artwork: "market",
+  },
   {
     title: "Lumen — English Learning Platform",
     year: "2026",
@@ -64,9 +77,7 @@ export const works: Work[] = [
       "An AI-powered English learning platform with personalized lessons, speech recognition for pronunciation practice, spaced repetition vocabulary system, and real-time progress tracking — built with modern React ecosystem.",
     tags: ["React", "TypeScript", "AI / LLM", "Speech API", "Tailwind CSS"],
     url: "https://github.com/dariushishere-code/LumenEnglishLearning",
-    src: u("photo-1516321318423-f06f85e504b3"),
-    alt: "Lumen — AI-powered English learning platform",
-    aspect: "aspect-[16/11]",
+    artwork: "terminal",
   },
   {
     title: "Savoria — Recipe Platform",
@@ -76,9 +87,7 @@ export const works: Work[] = [
       "A production-grade recipe discovery platform with an AI cooking assistant (RAG over real recipes), admin CMS, meal planner, shopping lists and a React Native app.",
     tags: ["Next.js", "TypeScript", "AI / LLM", "Monorepo"],
     url: "https://github.com/dariushishere-code/savoria",
-    src: u("photo-1504674900247-0877df9cc836"),
-    alt: "Savoria — recipe discovery platform",
-    aspect: "aspect-[16/11]",
+    artwork: "market",
   },
   {
     title: "JuniorPath — Internships",
@@ -88,9 +97,7 @@ export const works: Work[] = [
       "A virtual remote internship platform for junior developers — a horizontal roadmap, real portfolio-ready projects and a clear path from junior to job-ready.",
     tags: ["React", "Vite", "TypeScript", "Tailwind"],
     url: "https://github.com/dariushishere-code/JuniorPath",
-    src: u("photo-1522202176988-66273c2fd55f"),
-    alt: "JuniorPath — virtual internship platform",
-    aspect: "aspect-[4/5]",
+    artwork: "tower",
   },
   {
     title: "Aureum — Gold Marketplace",
@@ -100,9 +107,7 @@ export const works: Work[] = [
       "A Next.js + Tailwind CSS storefront concept for a gold marketplace — bars, coins, jewelry, antique pieces — wrapped in a black / gold / ivory theme.",
     tags: ["Next.js", "Tailwind CSS", "Design System"],
     url: "https://github.com/dariushishere-code/Goldmarketplace",
-    src: u("photo-1487958449943-2429e8be8625"),
-    alt: "Aureum — gold marketplace storefront",
-    aspect: "aspect-[4/5]",
+    artwork: "market",
   },
   {
     title: "Slice — Pizza Restaurant",
@@ -112,9 +117,7 @@ export const works: Work[] = [
       "A highly interactive, gamified site for a pizza-slice restaurant with a CoinSlice currency system — pure HTML, CSS and JavaScript with zero frameworks.",
     tags: ["HTML", "CSS", "JavaScript", "Motion"],
     url: "https://github.com/dariushishere-code/slicePizza",
-    src: "https://github.com/user-attachments/assets/e9e45c96-4d4a-4a23-93c4-5e4e76864f4c",
-    alt: "Slice — pizza slice restaurant website",
-    aspect: "aspect-[16/10]",
+    artwork: "market",
   },
   {
     title: "Burger & Pie — Restaurant",
@@ -124,9 +127,7 @@ export const works: Work[] = [
       "A mobile-first luxury website for a gourmet burger & artisan pie concept — dark-and-gold aesthetic with layered scroll and interactive menu moments.",
     tags: ["HTML", "CSS", "JavaScript", "Motion"],
     url: "https://github.com/dariushishere-code/Meat-Pie-Resturant",
-    src: "https://github.com/user-attachments/assets/35142337-7472-44db-b5f6-2d50b80e75cf",
-    alt: "Burger & Pie — luxury gourmet restaurant",
-    aspect: "aspect-[16/10]",
+    artwork: "market",
   },
   {
     title: "Spotify Search — Full-Stack",
@@ -136,9 +137,7 @@ export const works: Work[] = [
       "A Spotify-inspired search interface backed by a Node + Express API on the Spotify Web API — search songs, artists and albums with secure env-based auth.",
     tags: ["Node.js", "Express", "Spotify API"],
     url: "https://github.com/dariushishere-code/spotify-search-app",
-    src: u("photo-1493225457124-a3eb161ffa5f"),
-    alt: "Spotify Search — music search app",
-    aspect: "aspect-square",
+    artwork: "terminal",
   },
   {
     title: "Quiz App — Open Trivia",
@@ -148,9 +147,7 @@ export const works: Work[] = [
       "A single-page quiz engine on the Open Trivia Database — filters, score tracking, a 15-second timer and full localStorage persistence so a refresh never loses progress.",
     tags: ["HTML", "CSS", "JavaScript", "REST API"],
     url: "https://github.com/dariushishere-code/QuizApp",
-    src: u("photo-1526374965328-7f61d4dc18c5"),
-    alt: "Quiz App — Open Trivia questions",
-    aspect: "aspect-[4/5]",
+    artwork: "terminal",
   },
   {
     title: "Service UI",
@@ -160,21 +157,17 @@ export const works: Work[] = [
       "A pixel-close recreation of a light-themed salon / barbershop Services + Order interface, built with nothing but HTML and CSS.",
     tags: ["HTML", "CSS", "Service Design"],
     url: "https://github.com/dariushishere-code/services-ui",
-    src: u("photo-1560066984-138dadb4c035"),
-    alt: "Service UI — salon services interface",
-    aspect: "aspect-[16/11]",
+    artwork: "tower",
   },
   {
     title: "This Portfolio",
     year: "2026",
     category: "Portfolio",
     description:
-      "The site you are on right now — Next.js 15 + Tailwind v4 + Framer Motion, dark theme, horizontal project rail, photo archive, FAQ and Turkish on the language list.",
-    tags: ["Next.js", "Tailwind CSS", "Framer Motion"],
-    url: "https://alirezaebrahimi.tech",
-    src: u("photo-1460925895917-afdab827c52f"),
-    alt: "Alireza Ebrahimi portfolio website",
-    aspect: "aspect-square",
+      "A considered portfolio bringing selected work and front-end practice into one clear experience.",
+    tags: ["React", "Vite", "Tailwind CSS", "Framer Motion"],
+    url: "https://github.com/dariushishere-code/Blog",
+    artwork: "tower",
   },
 ];
 
@@ -215,10 +208,13 @@ export const stack = [
   "React",
   "Next.js",
   "TypeScript",
+  "JavaScript",
+  "HTML & CSS",
   "WebGL",
   "Three.js",
   "Tailwind CSS",
   "Framer Motion",
+  "Node.js",
   "Design Systems",
   "Responsive Design",
   "Web Performance",
@@ -263,34 +259,6 @@ export const education = [
   },
 ];
 
-export const focus = [
-  "HTML",
-  "CSS",
-  "JavaScript",
-  "React / Next.js",
-  "Responsive Design",
-  "Performance",
-  "Bug Hunting",
-  "Photography",
-];
-
-export const toolbox = [
-  "Tailwind CSS",
-  "Three.js / WebGL",
-  "Framer Motion",
-  "Node.js / Express",
-  "REST APIs",
-  "Git / GitHub",
-  "Figma",
-  "Netlify",
-  "SEO / A11y",
-  "Debugging / QA",
-  "Photography / Lightroom",
-];
-
-export const nowLine =
-  "Currently exploring — WebGL scenes, creative shaders, motion systems — and a 50mm lens that never leaves my bag.";
-
 export type Social = { label: string; handle: string; href: string };
 
 export const socials: Social[] = [
@@ -326,7 +294,7 @@ export const faqs = [
   },
   {
     q: "Is it true you do photography too?",
-    a: "Yes — photography is a real part of who I am. Light, composition and patience from the camera carry directly into how I design interfaces. Some of my favourite frames live in the photo archive on this site.",
+    a: "Yes — photography is a real part of who I am. Light, composition and patience from the camera carry directly into how I design interfaces.",
   },
   {
     q: "Can you jump into my existing project?",
@@ -337,69 +305,3 @@ export const faqs = [
     a: "Yes — remote, worldwide. I am open to collaborations, contract work and full-time front-end roles. The fastest way to reach me is email at the bottom of this page.",
   },
 ];
-
-export const gallery = [
-  { src: "https://dev.alirezaebrahimi.tech/webp/Carpet.webp", alt: "Carpet" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/Dress.webp", alt: "Dress" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_0250.webp", alt: "IMG_0250" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_0251.webp", alt: "IMG_0251" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_0261.webp", alt: "IMG_0261" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_0262.webp", alt: "IMG_0262" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_0341.webp", alt: "IMG_0341" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_0359.webp", alt: "IMG_0359" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_0371.webp", alt: "IMG_0371" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_0372.webp", alt: "IMG_0372" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_0443.webp", alt: "IMG_0443" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_0593.webp", alt: "IMG_0593" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_0595.webp", alt: "IMG_0595" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_0628.webp", alt: "IMG_0628" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_0630.webp", alt: "IMG_0630" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_0651.webp", alt: "IMG_0651" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_0732.webp", alt: "IMG_0732" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_1145.webp", alt: "IMG_1145" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_1155.webp", alt: "IMG_1155" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_1158.webp", alt: "IMG_1158" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_1185.webp", alt: "IMG_1185" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_1220.webp", alt: "IMG_1220" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_1239.webp", alt: "IMG_1239" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_1251.webp", alt: "IMG_1251" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_1252.webp", alt: "IMG_1252" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_1283.webp", alt: "IMG_1283" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_1289.webp", alt: "IMG_1289" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_1303.webp", alt: "IMG_1303" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_1355.webp", alt: "IMG_1355" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_1359.webp", alt: "IMG_1359" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_1360.webp", alt: "IMG_1360" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_1362.webp", alt: "IMG_1362" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_1366.webp", alt: "IMG_1366" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_1368.webp", alt: "IMG_1368" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_1385.webp", alt: "IMG_1385" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_20190314_202306_052.webp", alt: "IMG_20190314_202306_052" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_20190319_203904_509.webp", alt: "IMG_20190319_203904_509" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_20190324_222346_236.webp", alt: "IMG_20190324_222346_236" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_20190403_114236_896.webp", alt: "IMG_20190403_114236_896" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_20190403_214415_222.webp", alt: "IMG_20190403_214415_222" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_20190404_161624_648.webp", alt: "IMG_20190404_161624_648" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_20190405_151452_422.webp", alt: "IMG_20190405_151452_422" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_20190407_191509_607.webp", alt: "IMG_20190407_191509_607" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_20190411_211555_407.webp", alt: "IMG_20190411_211555_407" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_20190502_183152_164.webp", alt: "IMG_20190502_183152_164" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_20190506_194147_584.webp", alt: "IMG_20190506_194147_584" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_20190507_180812_276.webp", alt: "IMG_20190507_180812_276" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_20190508_200705_960.webp", alt: "IMG_20190508_200705_960" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_20190530_144145_791.webp", alt: "IMG_20190530_144145_791" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_20190629_144554_090.webp", alt: "IMG_20190629_144554_090" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_20190709_214916_402.webp", alt: "IMG_20190709_214916_402" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_20190710_221048_630.webp", alt: "IMG_20190710_221048_630" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/IMG_20190721_201604_129.webp", alt: "IMG_20190721_201604_129" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/Lady with beautiful eyes.webp", alt: "Lady with beautiful eyes" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/LRM_EXPORT_14700023858339_20190806_214822223.webp", alt: "LRM_EXPORT_14700023858339_20190806_214822223" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/LRM_EXPORT_14937612377363_20190806_215219812.webp", alt: "LRM_EXPORT_14937612377363_20190806_215219812" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/LRM_EXPORT_34914323241126_20190805_213949262.webp", alt: "LRM_EXPORT_34914323241126_20190805_213949262" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/LRM_EXPORT_35143776676976_20190805_214338716.webp", alt: "LRM_EXPORT_35143776676976_20190805_214338716" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/LRM_EXPORT_48673052026106_20190801_230048648.webp", alt: "LRM_EXPORT_48673052026106_20190801_230048648" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/LRM_EXPORT_51001152038083_20190801_233936748.webp", alt: "LRM_EXPORT_51001152038083_20190801_233936748" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/LRM_EXPORT_51265916921836_20190801_234401513.webp", alt: "LRM_EXPORT_51265916921836_20190801_234401513" },
-  { src: "https://dev.alirezaebrahimi.tech/webp/The CHAIR.webp", alt: "The CHAIR" },
-];
-

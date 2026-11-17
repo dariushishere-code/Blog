@@ -9,11 +9,11 @@ export default function Services() {
   return (
     <section id="services" className="scroll-mt-10 pt-24 lg:pt-32">
       <SectionHeading
-        index="02"
+        index="03"
         eyebrow="Services"
         title={
           <>
-            What I <span className="font-serif italic font-normal">do</span>
+            What I <span className="editorial-serif italic text-accent">do</span>
           </>
         }
       />
@@ -21,25 +21,23 @@ export default function Services() {
       <div className="mt-10 border-t border-hairline">
         {services.map((service, i) => (
           <Reveal key={service.n} delay={i * 0.06}>
-            <div className="group flex flex-col gap-4 border-b border-hairline py-10 sm:flex-row sm:items-center sm:gap-10 lg:py-12">
-              <span className="eyebrow w-16 shrink-0 text-neutral-400">
-                {service.n}
-              </span>
+            <div className="group grid gap-4 border-b border-hairline py-7 transition-colors duration-300 hover:bg-panel/60 sm:grid-cols-[3rem_1fr_auto] sm:items-start sm:gap-7 lg:py-9">
+              <span className="eyebrow pt-1 text-accent">{service.n}</span>
 
-              <div className="min-w-0 flex-1">
-                <h3 className="text-3xl font-medium tracking-tight text-ink sm:text-4xl">
+              <div className="min-w-0">
+                <h3 className="text-lg font-medium tracking-tight text-ink transition-colors group-hover:text-accent sm:text-xl">
                   {service.title}
                 </h3>
-                <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-neutral-400">
+                <p className="mt-2 max-w-2xl text-[14px] leading-7 text-muted">
                   {service.desc}
                 </p>
               </div>
 
-              <div className="flex shrink-0 items-center justify-between gap-8 sm:flex-col sm:items-end sm:gap-0">
-                <span className="font-serif text-[11px] italic text-neutral-400 sm:mb-4 sm:block">
+              <div className="flex items-center justify-between gap-6 sm:flex-col sm:items-end sm:gap-3">
+                <span className="eyebrow text-muted">
                   {service.tags.join("  ·  ")}
                 </span>
-                <ArrowUpRight className="h-7 w-7 text-neutral-600 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-ink" />
+                <ArrowUpRight className="h-5 w-5 text-muted transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent" />
               </div>
             </div>
           </Reveal>

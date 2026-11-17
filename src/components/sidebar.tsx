@@ -1,137 +1,199 @@
+import { useState } from "react";
 import { Link } from "react-router";
-import { languages, navLinks, profile, stats } from "@/lib/content";
+import { navLinks, profile, stats } from "@/lib/content";
+import { externalLinkProps } from "@/lib/utils";
+import EtchedAccretion from "./ui/etched-accretion";
 import { ArrowRight, ArrowUpRight } from "./icons";
-import { LiquidMetalButton } from "./ui/liquid-metal";
+
+function NavigationLink({
+  href,
+  label,
+  onClick,
+}: {
+  href: string;
+  label: string;
+  onClick?: () => void;
+}) {
+  const className =
+    "text-[13px] text-muted transition-colors hover:text-accent";
+
+  return href.startsWith("/") ? (
+    <Link className={className} to={href} onClick={onClick}>
+      {label}
+    </Link>
+  ) : (
+    <a className={className} href={href} onClick={onClick}>
+      {label}
+    </a>
+  );
+}
 
 export default function Sidebar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
-    <aside
-      id="top"
-      className="no-scrollbar shrink-0 border-hairline lg:sticky lg:top-0 lg:h-screen lg:w-[430px] lg:overflow-y-auto lg:border-r xl:w-[470px]"
+    <EtchedAccretion
+      height="auto"
+      className="min-h-[100svh]"
+      aria-label="Hero with a crimson accretion disk"
+      params={{
+        center: [0.78, 0.46],
+        holeSize: 0.046,
+        diskRadius: 1.15,
+        grain: 0.72,
+        vignette: 0.42,
+        exposure: 1.05,
+        clouds: 0.75,
+      }}
     >
-      <div className="px-5 py-8 sm:px-8 lg:px-10 lg:py-14">
-        {/* Anchor nav — section links keep native anchors, pages use the router */}
-        <nav className="flex flex-wrap gap-x-6 gap-y-2 border-b border-hairline pb-6">
-          {navLinks.map((link) =>
-            link.href.startsWith("/") ? (
-              <Link
-                key={link.href}
-                to={link.href}
-                className="text-[13px] text-neutral-400 transition-colors hover:text-ink"
-              >
-                {link.label}
-              </Link>
-            ) : (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-[13px] text-neutral-400 transition-colors hover:text-ink"
-              >
-                {link.label}
-              </a>
-            )
-          )}
-        </nav>
+    <header id="top" className="section-shell relative z-10 pt-4 text-ink sm:pt-6">
+      <nav aria-label="Main navigation" className="border-b border-white/15">
+        <div className="flex min-h-16 items-center justify-between gap-6 pb-4">
+          <Link
+            to="/"
+            className="flex shrink-0 items-center gap-3 text-ink"
+            aria-label="Alireza Ebrahimi, home"
+          >
+            <span className="font-serif text-2xl tracking-[-0.06em]">AE.</span>
+            <span className="hidden text-[13px] font-medium sm:block">
+              {profile.name}
+            </span>
+          </Link>
 
-        {/* Profile */}
-        <div className="mt-10 lg:mt-12">
-          <div className="relative h-[120px] w-[120px] overflow-hidden rounded-full border border-hairline shadow-[0_0_0_1px_rgba(255,255,255,0.06)]">
-            <img
-              src="/profile.jpg"
-              alt={`${profile.name} — portrait photo`}
-              width={912}
-              height={1136}
-              className="absolute inset-0 h-full w-full object-cover"
-            />
-          </div>
-          <h1 className="mt-7 text-[2.6rem] font-medium leading-[0.98] tracking-tight text-ink sm:text-6xl">
-            {profile.name}
-          </h1>
-          <p className="eyebrow mt-4 text-neutral-500">{profile.title}</p>
-          <p className="mt-6 max-w-sm text-[15px] leading-relaxed text-neutral-400">
-            {profile.intro}
-          </p>
-        </div>
-
-        {/* Availability */}
-        <div className="mt-7 flex items-center gap-2.5">
-          <span className="relative flex h-2.5 w-2.5">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-50" />
-            <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-accent" />
-          </span>
-          <span className="text-sm text-neutral-400">{profile.status}.</span>
-        </div>
-
-        {/* CTA */}
-        <LiquidMetalButton
-          href={`mailto:${profile.email}`}
-          size="sm"
-          className="mt-6"
-          icon={<ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-0.5" />}
-          metalConfig={{ colorBack: "#35d17f", colorTint: "#86efac" }}
-        >
-          Get in touch
-        </LiquidMetalButton>
-
-        <a
-          href={profile.resumeUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="group mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-neutral-400 underline-offset-4 transition-colors hover:text-ink hover:underline"
-        >
-          Résumé (PDF)
-          <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-        </a>
-
-        {/* Languages */}
-        <div className="mt-12">
-          <p className="eyebrow text-neutral-500">Languages</p>
-          <div className="mt-5 flex flex-wrap items-center gap-x-7 gap-y-3">
-            {languages.map((language) => (
-              <div key={language.name} className="whitespace-nowrap">
-                <span className="text-[13px] font-semibold tracking-[0.18em] text-neutral-400">
-                  {language.name.toUpperCase()}
-                </span>
-                <span className="ml-2 text-[11px] tracking-[0.18em] text-neutral-500">
-                  {language.level}
-                </span>
-              </div>
+          <div className="hidden items-center gap-5 lg:flex xl:gap-7">
+            {navLinks.map((link) => (
+              <NavigationLink key={link.href} {...link} />
             ))}
           </div>
-        </div>
 
-        {/* About */}
-        <div className="mt-12">
-          <h2 className="eyebrow text-ink">About</h2>
-          <p className="mt-4 text-[15px] leading-relaxed text-neutral-400">
-            {profile.about}
-          </p>
-        </div>
-
-        {/* Stats */}
-        <dl className="mt-10 grid grid-cols-2 overflow-hidden rounded-2xl border border-hairline">
-          {stats.map((stat, i) => (
-            <div
-              key={stat.label}
-              className={`p-5 ${i % 2 === 0 ? "border-r border-hairline" : ""} ${
-                i < 2 ? "border-b border-hairline" : ""
-              }`}
+          <div className="flex items-center gap-3">
+            <a
+              href={`mailto:${profile.email}`}
+              className="hidden border border-white/70 px-4 py-2 text-[12px] font-medium text-ink transition-colors hover:bg-ink hover:text-paper sm:inline-flex"
             >
-              <dt className="font-serif text-3xl italic text-ink">
-                {stat.value}
-              </dt>
-              <dd className="mt-1.5 text-xs leading-snug text-neutral-500">
-                {stat.label}
-              </dd>
-            </div>
+              Get in touch <ArrowUpRight className="ml-2 h-3.5 w-3.5" />
+            </a>
+            <button
+              type="button"
+              className="inline-flex h-10 items-center gap-2 border border-white/20 px-3 text-[12px] font-medium text-ink transition-colors hover:border-white/70 lg:hidden"
+              aria-expanded={menuOpen}
+              aria-controls="mobile-navigation"
+              onClick={() => setMenuOpen((open) => !open)}
+            >
+              {menuOpen ? "Close" : "Menu"}
+              <span aria-hidden="true">{menuOpen ? "−" : "+"}</span>
+            </button>
+          </div>
+        </div>
+        <div
+          id="mobile-navigation"
+          hidden={!menuOpen}
+          className="grid grid-cols-2 gap-x-5 gap-y-4 border-t border-white/15 py-5 lg:hidden"
+        >
+          {navLinks.map((link) => (
+            <NavigationLink
+              key={link.href}
+              {...link}
+              onClick={() => setMenuOpen(false)}
+            />
           ))}
-        </dl>
+        </div>
+      </nav>
 
-        {/* Footer */}
-        <p className="mt-12 pb-2 text-xs text-neutral-500">
-          © 2026 {profile.name} — {profile.title}
-        </p>
+      <section className="flex min-h-[min(760px,calc(100svh-80px))] flex-col items-center justify-center py-16 text-center sm:py-20 lg:py-24">
+        <div className="w-full">
+          <div className="mb-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+            <p className="eyebrow text-muted">
+              {profile.title} <span aria-hidden="true">·</span> {profile.location}
+            </p>
+            <span className="inline-flex items-center gap-2 text-[12px] text-muted">
+              <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
+              {profile.status}
+            </span>
+          </div>
+          <h1 className="hero-name text-ink" aria-label="Alireza Ebrahimi">
+            <span className="hero-name-lines" aria-hidden="true">
+              {["ALIREZA", "EBRAHIMI"].map((word) => (
+                <span className="hero-name-line" key={word}>
+                  {[...word].map((letter, index) => (
+                    <span className="hero-name-letter" key={`${word}-${index}`}>
+                      {letter}
+                    </span>
+                  ))}
+                </span>
+              ))}
+            </span>
+            <span className="hero-name-glitch hero-name-glitch-red" aria-hidden="true">
+              {["ALIREZA", "EBRAHIMI"].map((word) => (
+                <span className="hero-name-line" key={word}>
+                  {[...word].map((letter, index) => (
+                    <span className="hero-name-letter" key={`${word}-${index}`}>
+                      {letter}
+                    </span>
+                  ))}
+                </span>
+              ))}
+            </span>
+            <span className="hero-name-glitch hero-name-glitch-cyan" aria-hidden="true">
+              {["ALIREZA", "EBRAHIMI"].map((word) => (
+                <span className="hero-name-line" key={word}>
+                  {[...word].map((letter, index) => (
+                    <span className="hero-name-letter" key={`${word}-${index}`}>
+                      {letter}
+                    </span>
+                  ))}
+                </span>
+              ))}
+            </span>
+          </h1>
+          <p className="mx-auto mt-8 max-w-xl text-lg leading-relaxed tracking-[-0.02em] text-ink sm:text-xl">
+            {profile.tagline}
+          </p>
+          <p className="mx-auto mt-3 max-w-lg text-[15px] leading-7 text-muted">
+            {profile.intro}
+          </p>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+            <a
+              href={`mailto:${profile.email}`}
+              className="group inline-flex min-h-12 items-center gap-4 bg-accent px-5 text-sm font-medium text-[#07070c] transition-colors hover:bg-ink hover:text-paper"
+            >
+              Let&apos;s talk
+              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </a>
+            <a
+              href="#work"
+              className="group inline-flex min-h-12 items-center gap-2 text-sm font-medium text-ink transition-colors hover:text-accent"
+            >
+              Explore selected work
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </a>
+          </div>
+          <a
+            href={profile.resumeUrl}
+            {...externalLinkProps("Résumé PDF")}
+            className="mt-5 inline-flex items-center gap-1 text-[12px] text-muted underline decoration-white/25 underline-offset-4 transition-colors hover:text-accent hover:decoration-accent"
+          >
+            Résumé (PDF) <ArrowUpRight className="h-3 w-3" />
+          </a>
+        </div>
+      </section>
+
+      <div className="grid grid-cols-2 border-b border-white/15 py-5 sm:py-7">
+        {stats.map((stat, index) => (
+          <div
+            key={stat.label}
+            className={`${index > 0 ? "border-l border-white/15 pl-4 sm:pl-7" : ""} pr-3`}
+          >
+            <p className="font-mono text-2xl font-medium tracking-tight text-ink sm:text-3xl">
+              {stat.value}
+            </p>
+            <p className="mt-1 max-w-[12rem] text-[11px] leading-snug text-muted sm:text-[13px]">
+              {stat.label}
+            </p>
+          </div>
+        ))}
       </div>
-    </aside>
+    </header>
+    </EtchedAccretion>
   );
 }

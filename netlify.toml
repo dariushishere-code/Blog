@@ -9,7 +9,7 @@
   # older patch on Netlify's build image and break the build.
   NODE_VERSION = "22.23.2"
 
-# SPA fallback — /gallery and any unknown route serve the app shell
+# SPA fallback — unknown routes serve the app shell
 [[redirects]]
   from = "/*"
   to = "/index.html"
@@ -20,9 +20,3 @@
   for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
-
-# Profile photo — short cache so it can be replaced without stale CDN copy
-[[headers]]
-  for = "/profile.jpg"
-  [headers.values]
-    Cache-Control = "public, max-age=86400"
